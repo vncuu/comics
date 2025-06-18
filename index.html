@@ -15,6 +15,7 @@
       padding: 10px;
       margin: 10px 0;
       font-size: 16px;
+      box-sizing: border-box;
     }
     #logoutBtn, #regenerateBtn {
       display: none;
@@ -23,7 +24,7 @@
       margin-top: 20px;
       font-weight: bold;
     }
-    /* Article container styling */
+    /* Articles container styling */
     #articlesContainer {
       margin-top: 40px;
       display: none; /* hidden by default */
@@ -47,6 +48,7 @@
       height: 40px;
       border-radius: 50%;
       margin-right: 10px;
+      object-fit: cover;
     }
   </style>
 </head>
@@ -148,14 +150,15 @@
         passwordInput.style.display = 'block';
         roleDisplay.textContent = '';
         regenerateBtn.style.display = 'none';
+
         // Hide articles when logged out
         articlesContainer.style.display = 'none';
       }
     });
 
     loginBtn.addEventListener('click', () => {
-      const email = emailInput.value;
-      const password = passwordInput.value;
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
       if (!email || !password) {
         alert('Please enter email and password.');
         return;
