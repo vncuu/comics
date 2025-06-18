@@ -1,44 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login Demo</title>
+  <title>Firebase Login Page</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
   <style>
-    body { font-family: Arial; text-align: center; padding: 50px; }
-    #secret { display: none; margin-top: 20px; }
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+    input { padding: 10px; margin: 10px; width: 250px; }
+    button { padding: 10px 20px; margin: 5px; }
+    #status { margin-top: 20px; font-weight: bold; }
   </style>
 </head>
 <body>
-  <h2>Login</h2>
-  <input type="text" id="email" placeholder="Email"><br><br>
-  <input type="password" id="password" placeholder="Password"><br><br>
-  <button onclick="login()">Login</button>
 
-  <div id="secret">
-    <h3>Welcome to the Secret Page!</h3>
-    <p>This content is only shown after login.</p>
-    <button onclick="logout()">Logout</button>
-  </div>
+  <h2>Login with Firebase</h2>
+
+  <input type="email" id="email" placeholder="Email" required><br>
+  <input type="password" id="password" placeholder="Password" required><br>
+
+  <button onclick="login()">Login</button>
+  <button onclick="signup()">Sign Up</button>
+  <button onclick="logout()">Logout</button>
+
+  <div id="status">Not logged in</div>
 
   <script>
-    const validEmail = "user@example.com";
-    const validPassword = "mypassword123";
+    // Replace these with your own Firebase project config
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    const status = document.getElementById('status');
+
+    // Listen for auth state changes
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        status.textContent = `Logged in as: ${user.email}`;
+      } else {
+        status.textContent = "Not logged in";
+      }
+    });
 
     function login() {
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => alert('Logged in successfully!'))
+        .catch(error => alert('Error: ' + error.message));
+    }
 
-      if (email === validEmail && password === validPassword) {
-        document.getElementById('secret').style.display = 'block';
-        document.querySelector('h2').style.display = 'none';
-      } else {
-        alert("Incorrect email or password");
-      }
+    function signup() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => alert('Account created!'))
+        .catch(error => alert('Error: ' + error.message));
     }
 
     function logout() {
-      document.getElementById('secret').style.display = 'none';
-      document.querySelector('h2').style.display = 'block';
+      auth.signOut()
+        .then(() => alert('Logged out!'))
+        .catch(error => alert('Error: ' + error.message));
     }
   </script>
+
 </body>
 </html>
