@@ -4,10 +4,25 @@
   <meta charset="UTF-8" />
   <title>Risetopia Login</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 400px; margin: 50px auto; }
-    input, button { width: 100%; padding: 10px; margin: 10px 0; font-size: 16px; }
-    #logoutBtn { display: none; }
-    #status { margin-top: 20px; font-weight: bold; }
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    #logoutBtn, #regenerateBtn {
+      display: none;
+    }
+    #status, #roleDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -18,8 +33,10 @@
 
   <button id="loginBtn">Login</button>
   <button id="logoutBtn">Logout</button>
+  <button id="regenerateBtn">Regenerate Code</button>
 
   <div id="status">Not logged in</div>
+  <div id="roleDisplay"></div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
@@ -29,7 +46,7 @@
       apiKey: "AIzaSyAOaULLFRJPWko_rVuJqhugCDi8wJzl1WE",
       authDomain: "rise-80783.firebaseapp.com",
       projectId: "rise-80783",
-      storageBucket: "rise-80783.firebasestorage.app",
+      storageBucket: "rise-80783.appspot.com",
       messagingSenderId: "569657077839",
       appId: "1:569657077839:web:2fe104e4a7f00b7226fa3a",
       measurementId: "G-DW52DVE31M"
@@ -42,7 +59,21 @@
     const passwordInput = document.getElementById('password');
     const loginBtn = document.getElementById('loginBtn');
     const logoutBtn = document.getElementById('logoutBtn');
+    const regenerateBtn = document.getElementById('regenerateBtn');
     const status = document.getElementById('status');
+    const roleDisplay = document.getElementById('roleDisplay');
+
+    let currentCode = '';
+
+    function generateRandomCode() {
+      return Math.floor(10000000 + Math.random() * 90000000).toString();
+    }
+
+    function displayOwnerCode() {
+      currentCode = generateRandomCode();
+      roleDisplay.textContent = `Welcome Owner! Code: ${currentCode}`;
+      regenerateBtn.style.display = 'block';
+    }
 
     onAuthStateChanged(auth, user => {
       if (user) {
@@ -51,12 +82,27 @@
         logoutBtn.style.display = 'block';
         emailInput.style.display = 'none';
         passwordInput.style.display = 'none';
+
+        if (user.email === 'gogo.lindor@gmail.com') {
+          displayOwnerCode();
+        } else {
+          const roles = {
+            "admin1@example.com": "Admin",
+            "staff1@example.com": "Staff",
+            "moderator@example.com": "Moderator"
+          };
+          const role = roles[user.email] || "User";
+          roleDisplay.textContent = `Welcome ${role}`;
+          regenerateBtn.style.display = 'none';
+        }
       } else {
         status.textContent = 'Not logged in';
         loginBtn.style.display = 'block';
         logoutBtn.style.display = 'none';
         emailInput.style.display = 'block';
         passwordInput.style.display = 'block';
+        roleDisplay.textContent = '';
+        regenerateBtn.style.display = 'none';
       }
     });
 
@@ -84,6 +130,11 @@
         .catch(error => {
           alert('Logout failed: ' + error.message);
         });
+    });
+
+    regenerateBtn.addEventListener('click', () => {
+      currentCode = generateRandomCode();
+      roleDisplay.textContent = `Welcome Owner! Code: ${currentCode}`;
     });
   </script>
 </body>
