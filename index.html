@@ -23,6 +23,31 @@
       margin-top: 20px;
       font-weight: bold;
     }
+    /* Article container styling */
+    #articlesContainer {
+      margin-top: 40px;
+      display: none; /* hidden by default */
+      text-align: left;
+    }
+    .articleBox {
+      background-color: #bbe5ff;
+      border: 2px solid black;
+      padding: 20px;
+      margin-bottom: 20px;
+      color: #c9a0ec;
+      border-radius: 6px;
+    }
+    .socialMediaHeader {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .socialMediaHeader img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
@@ -37,6 +62,22 @@
 
   <div id="status">Not logged in</div>
   <div id="roleDisplay"></div>
+
+  <!-- Articles container hidden by default -->
+  <div id="articlesContainer">
+    <div class="articleBox">
+      <h3>NEW THINGS</h3>
+      <p><strong>Rise Dishonored</strong> is working on 3D models and animations.</p>
+    </div>
+
+    <div class="articleBox">
+      <div class="socialMediaHeader">
+        <img src="icon.png" alt="Icon" />
+        <h3 style="margin: 0;">SOCIAL MEDIA ACCESS</h3>
+      </div>
+      <p><strong>We need your design</strong></p>
+    </div>
+  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
@@ -62,6 +103,7 @@
     const regenerateBtn = document.getElementById('regenerateBtn');
     const status = document.getElementById('status');
     const roleDisplay = document.getElementById('roleDisplay');
+    const articlesContainer = document.getElementById('articlesContainer');
 
     let currentCode = '';
 
@@ -83,6 +125,9 @@
         emailInput.style.display = 'none';
         passwordInput.style.display = 'none';
 
+        // Show articles for everyone logged in
+        articlesContainer.style.display = 'block';
+
         if (user.email === 'gogo.lindor@gmail.com') {
           displayOwnerCode();
         } else {
@@ -103,6 +148,8 @@
         passwordInput.style.display = 'block';
         roleDisplay.textContent = '';
         regenerateBtn.style.display = 'none';
+        // Hide articles when logged out
+        articlesContainer.style.display = 'none';
       }
     });
 
@@ -137,17 +184,5 @@
       roleDisplay.textContent = `Welcome Owner! Code: ${currentCode}`;
     });
   </script>
-
-<article style="margin-top: 40px; color: #c9a0ec; text-align: left;">
-  <h3>NEW THINGS</h3>
-  <p><strong>Rise Dishonored</strong> is working on 3D models and animations.</p>
-
-  <div style="display: flex; align-items: center; margin-top: 20px;">
-    <img src="icon.png" alt="Icon" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;" />
-    <h3 style="margin: 0;">SOCIAL MEDIA ACCESS</h3>
-  </div>
-  <p style="margin-left: 50px;"><strong>We need your design</strong></p>
-</article>
-
 </body>
 </html>
