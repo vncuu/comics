@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    max-width: 800px; /* Increased max-width for better menu display */
+    max-width: 800px; /* Max width for the entire page content */
     margin: 0 auto; /* Center the body content */
     padding-top: 60px; /* Space for fixed header */
     text-align: center;
@@ -18,14 +18,24 @@ header {
     box-sizing: border-box; /* Include padding in width calculation */
     z-index: 1000; /* Ensure it's above other content */
     display: flex; /* Use flexbox for alignment */
-    justify-content: space-between; /* Space out logo and nav */
+    justify-content: space-between; /* Space out left and right sections */
     align-items: center; /* Vertically align items */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-right {
+    display: flex; /* For potential future additions */
+    align-items: center;
 }
 
 .header-logo {
     font-size: 1.5em;
     font-weight: bold;
-    margin: 0;
+    margin-right: 20px; /* Space between logo and nav */
     color: white; /* Ensure logo text is white */
     text-decoration: none; /* Remove underline from logo link */
 }
@@ -34,11 +44,12 @@ nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex; /* Make menu items horizontal */
+    display: flex; /* Make top-level menu items horizontal */
 }
 
 nav li {
-    margin-left: 20px; /* Space between menu items */
+    position: relative; /* Needed for dropdown positioning */
+    margin-left: 20px; /* Space between top-level menu items */
 }
 
 nav a {
@@ -47,6 +58,7 @@ nav a {
     padding: 5px 10px;
     border-radius: 4px;
     transition: background-color 0.3s ease;
+    display: block; /* Make links fill their list item space */
 }
 
 nav a:hover {
@@ -56,6 +68,57 @@ nav a:hover {
 nav a.active {
     background-color: #007bff; /* Highlight for active page */
 }
+
+/* --- Dropdown Specific Styling --- */
+.dropdown .nav-button {
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: #444; /* Darker background for dropdown */
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left: 0; /* Align dropdown to the left of its parent */
+    top: 100%; /* Position below the parent link */
+    padding: 0;
+    margin: 0;
+    border-radius: 0 0 4px 4px; /* Rounded bottom corners */
+}
+
+.dropdown-content li {
+    margin: 0; /* Remove margin for dropdown items */
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #666;
+}
+
+/* Show the dropdown menu on click/toggle via JS */
+.dropdown.show .dropdown-content {
+    display: block;
+}
+
+/* --- Welcome User Display --- */
+#welcomeUserDisplay {
+    color: #e0e0e0;
+    font-size: 1em;
+    padding: 5px 10px;
+    background-color: #555;
+    border-radius: 4px;
+    margin-left: 20px; /* Space from right edge or other elements */
+}
+
 
 /* --- Content Wrapper & Page Sections --- */
 .content-wrapper {
