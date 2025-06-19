@@ -2,19 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Risetopia Login</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Risetopia</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <a href="#" class="header-logo">Risetopia</a>
-        <nav>
-            <ul>
-                <li><a href="#login-section" id="navLogin">Login</a></li>
-                <li><a href="#logout" id="navLogout" style="display: none;">Logout</a></li>
-                <li><a href="#rise-dishonored-page" id="navRiseDishonored">Rise Dishonored Page</a></li>
-            </ul>
-        </nav>
+        <div class="header-left">
+            <a href="#" class="header-logo">Risetopia</a>
+            <nav>
+                <ul>
+                    <li class="dropdown" id="authMenuDropdown">
+                        <a href="#" id="navAuthTrigger" class="nav-button">Login</a>
+                        <ul class="dropdown-content">
+                            <li><a href="#" id="navLogout">Logout</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#rise-dishonored-page" id="navRiseDishonored">Rise Dishonored Page</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-right">
+            <span id="welcomeUserDisplay" style="display: none;"></span>
+        </div>
     </header>
 
     <div class="content-wrapper">
