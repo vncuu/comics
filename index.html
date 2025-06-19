@@ -4,13 +4,19 @@
     <meta charset="UTF-8" />
     <title>Risetopia</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="header-left">
-            <a href="#" class="header-logo">Risetopia</a>
+    <section class="navbar">
+        <div class="container">
+            <div class="empty-left"></div>
+
+            <div class="logo-centered">
+                <a href="#" class="header-logo">Risetopia</a>
+            </div>
+
             <nav>
-                <ul>
+                <ul id="navbar-main">
                     <li class="dropdown" id="authMenuDropdown">
                         <a href="#" id="navAuthTrigger" class="nav-button">Login</a>
                         <ul class="dropdown-content">
@@ -20,11 +26,12 @@
                     <li><a href="#rise-dishonored-page" id="navRiseDishonored">Rise Dishonored Page</a></li>
                 </ul>
             </nav>
+            
+            <div class="header-right">
+                <span id="welcomeUserDisplay" style="display: none;"></span>
+            </div>
         </div>
-        <div class="header-right">
-            <span id="welcomeUserDisplay" style="display: none;"></span>
-        </div>
-    </header>
+    </section>
 
     <div class="content-wrapper">
         <div id="login-section" class="page-section">
