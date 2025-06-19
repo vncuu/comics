@@ -9,22 +9,24 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background-color: #1a1a1a; /* Consistent dark background */
-    font-family: 'Space Mono', monospace; /* Default font for the body */
+    background-color: #1a1a1a;
+    font-family: 'Space Mono', monospace;
 }
 
-/* Navbar */
+/* Navbar - Stays fixed at the top */
 .navbar {
     display: flex;
     justify-content: space-between;
     background-color: hsla(197, 64%, 23%, 0.95); /* Dishonored blue/green tone */
-    position: fixed;
+    position: fixed; /* Key change: makes it stick to the top */
     width: 100%;
     z-index: 999;
-    height: 100px; /* Fixed height for the navbar */
+    height: 100px;
     align-items: center;
     padding: 0 20px;
-    transition: opacity 0.4s ease, transform 0.4s ease; /* For smooth hide/show */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    top: 0; /* Ensures it's at the very top */
+    left: 0;
 }
 
 .container {
@@ -34,93 +36,46 @@ html, body {
     width: 100%;
 }
 
-/* Centered Risetopia Logo */
+/* Risetopia Logo - now pushed to the left, but remains visually centered for aesthetics */
 .logo {
     display: flex;
     align-items: center;
-    position: relative; /* For dropdown positioning */
-    flex-grow: 1; /* Allow it to take available space */
-    justify-content: center; /* Center content within logo div */
-    padding-left: 100px; /* Offset for desktop menu, adjusted for spacing */
+    position: relative;
+    /* Removed flex-grow here to prevent it from pushing content too far */
+    padding-right: 20px; /* Space between logo and menu items */
 }
 
 .header-logo {
     text-decoration: none;
-    font-family: Impact, sans-serif; /* Impact font for game title feel */
-    font-size: 2.5em; /* Larger font size for the logo */
+    font-family: Impact, sans-serif;
+    font-size: 2.5em;
     letter-spacing: 0.05em;
     color: white;
-    /* Removed margin from here, handled by flexbox */
+    /* Added positioning to visually center it in the available space */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
-/* Dropdown trigger (for smaller screens) */
+/* Mobile dropdown trigger (the '↓' icon) */
 .drop {
     font-size: 2em;
     cursor: pointer;
     color: white;
     user-select: none;
     display: none; /* Hidden by default, shown via media query */
-    position: absolute; /* Position relative to .logo */
-    left: 20px; /* Position it to the left side */
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative; /* Relative to .logo */
+    z-index: 1001; /* Ensure it's clickable above the logo text if needed */
+    margin-left: 10px; /* Space from logo */
 }
 
-/* Dropdown Menu (for smaller screens) */
-.dropdown-menu {
-    position: fixed; /* Fixed so it overlays content */
-    top: 100px; /* Below the navbar */
-    left: 0;
-    width: 100%;
-    background-color: hsla(197, 64%, 23%, 0.98); /* Slightly more opaque */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-    z-index: 998; /* Below the navbar, but above content */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-20px);
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    padding: 10px 0;
-    list-style: none; /* Ensure no bullets */
-}
-
-.dropdown-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.dropdown-menu li {
-    padding: 0;
-    margin: 0;
-}
-
-.dropdown-menu a {
-    color: white;
-    padding: 12px 20px;
-    text-decoration: none;
-    display: block;
-    font-size: 1.2em;
-    text-align: center; /* Center text in mobile dropdown */
-    margin: 0;
-    font-family: 'Space Mono', monospace; /* Keep Space Mono for dropdown items */
-}
-
-.dropdown-menu a:hover {
-    background-color: hsla(0, 56%, 40%, 0.95); /* Dishonored red/orange tone on hover */
-    color: white;
-}
-
-/* Main Navigation (for larger screens) */
+/* Main Navigation (for larger screens) - now starts from the left after the logo */
 nav {
-    flex-grow: 1; /* Allows nav to take available space */
     display: flex;
-    justify-content: flex-end; /* Push nav links to the right */
+    flex-grow: 1; /* Allows nav to take available space and push header-right to far right */
+    justify-content: flex-start; /* Aligns nav items to the left within the available space */
+    margin-left: 120px; /* Adjust this value to position the links after the logo visually */
 }
 
 #navbar-main {
@@ -132,20 +87,20 @@ nav {
 
 #navbar-main li {
     margin: 0 10px;
-    position: relative; /* For dropdown positioning */
+    position: relative;
 }
 
 #navbar-main a {
     text-decoration: none;
-    font-family: Impact, sans-serif; /* Impact font for main links */
-    font-size: 1.5em; /* Larger font for main links */
+    font-family: Impact, sans-serif;
+    font-size: 1.5em;
     letter-spacing: 0.02em;
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
     display: block;
-    white-space: nowrap; /* Prevent wrapping for link text */
+    white-space: nowrap;
 }
 
 #navbar-main a:hover {
@@ -183,7 +138,7 @@ nav {
     display: block;
     text-align: left;
     font-size: 1em;
-    font-family: 'Space Mono', monospace; /* Space Mono for dropdown items */
+    font-family: 'Space Mono', monospace;
     border-radius: 0;
 }
 
@@ -195,10 +150,61 @@ nav {
     display: block;
 }
 
-/* Header Right - Welcome User */
+/* Mobile Dropdown Menu */
+.dropdown-menu {
+    position: fixed;
+    top: 100px; /* Below the navbar */
+    left: 0;
+    width: 100%;
+    background-color: hsla(197, 64%, 23%, 0.98);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    padding: 10px 0;
+    list-style: none;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu li {
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu a {
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 1.2em;
+    text-align: center;
+    margin: 0;
+    font-family: 'Space Mono', monospace;
+}
+
+.dropdown-menu a:hover {
+    background-color: hsla(0, 56%, 40%, 0.95);
+    color: white;
+}
+
+/* Header Right - Welcome User (always on the far right) */
 .header-right {
     display: flex;
     align-items: center;
+    margin-left: auto; /* Pushes it to the far right */
     padding-left: 20px;
 }
 
@@ -218,26 +224,26 @@ body {
 
 /* Content Wrapper & Page Sections */
 .content-wrapper {
-    max-width: 800px; /* Max width for the entire page content */
-    margin: 20px auto; /* Center the body content */
+    max-width: 800px;
+    margin: 20px auto;
     text-align: center;
-    min-height: calc(100vh - 100px - 40px); /* Adjust to fill viewport minus navbar and some bottom margin */
+    min-height: calc(100vh - 100px - 40px);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align items to the top of the wrapper */
+    justify-content: flex-start;
     align-items: center;
-    padding: 0 20px; /* Add some horizontal padding */
+    padding: 0 20px;
 }
 
 .page-section {
     width: 100%;
-    max-width: 600px; /* Max width for inner section content */
+    max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white overlay */
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3); /* Subtle shadow for depth */
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
 /* Existing Login/Content Styling */
@@ -319,38 +325,38 @@ button:hover {
     }
 
     .logo {
-        padding-left: 0; /* Remove offset for centering on small screens */
-        justify-content: flex-start; /* Align logo to the left, as the dropdown will take over center */
+        justify-content: flex-start; /* Align logo to the left, as dropdown trigger is also left */
+        padding-right: 0; /* Remove padding */
     }
 
     .header-logo {
-        position: absolute; /* Position Risetopia text */
-        left: 50%;
-        transform: translateX(-50%); /* Center it regardless of drop icon */
+        position: relative; /* Reset positioning for mobile logo */
+        left: auto;
+        transform: none;
+        margin-left: 50px; /* Space from the dropdown trigger */
     }
-
-    .header-right {
-        margin-left: 0; /* Remove auto margin pushing it right */
-        position: absolute;
-        right: 20px; /* Position to the far right */
+    
+    nav {
+        margin-left: 0; /* Remove margin from nav */
     }
 }
 
 /* Further adjustments for very small screens if needed */
 @media (max-width: 480px) {
     .navbar {
-        height: 80px; /* Slightly smaller navbar */
+        height: 80px;
     }
     body {
         padding-top: 80px;
     }
     .header-logo {
-        font-size: 2em; /* Smaller logo text */
+        font-size: 2em;
+        margin-left: 40px; /* Adjust spacing for smaller drop icon */
     }
     .drop {
         font-size: 1.8em;
     }
     .dropdown-menu {
-        top: 80px; /* Adjust dropdown position */
+        top: 80px;
     }
 }
