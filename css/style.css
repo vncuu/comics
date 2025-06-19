@@ -1,95 +1,103 @@
-body {
-    font-family: Arial, sans-serif;
-    max-width: 800px; /* Max width for the entire page content */
-    margin: 0 auto; /* Center the body content */
-    padding-top: 60px; /* Space for fixed header */
-    text-align: center;
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* --- Header and Navigation Styling --- */
-header {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    position: fixed; /* Fix header to the top */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #1a1a1a; /* Consistent dark background */
+    font-family: 'Space Mono', monospace;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: hsla(197, 64%, 23%, 0.95);
+    position: fixed;
     width: 100%;
-    top: 0;
-    left: 0;
-    box-sizing: border-box; /* Include padding in width calculation */
-    z-index: 1000; /* Ensure it's above other content */
-    display: flex; /* Use flexbox for alignment */
-    justify-content: space-between; /* Space out left and right sections */
-    align-items: center; /* Vertically align items */
+    z-index: 999;
+    height: 100px;
+    align-items: center;
+    padding: 0 20px;
 }
 
-.header-left {
+.container { /* This is for the navbar's inner container */
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Distribute items across the container */
+    width: 100%;
 }
 
-.header-right {
-    display: flex; /* For potential future additions */
-    align-items: center;
+/* Centered Logo */
+.logo-centered {
+    flex-grow: 1; /* Allows it to take available space */
+    text-align: center; /* Centers the text inside */
 }
 
-.header-logo {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-right: 20px; /* Space between logo and nav */
-    color: white; /* Ensure logo text is white */
-    text-decoration: none; /* Remove underline from logo link */
+.logo-centered .header-logo {
+    text-decoration: none;
+    font-family: Impact, sans-serif;
+    font-size: 2.5em; /* Larger font size for the centered logo */
+    letter-spacing: 0.05em;
+    color: white;
+    display: inline-block; /* Allows text-align to work */
+    padding: 0 10px; /* Add some padding around the text */
 }
 
-nav ul {
+/* Navigation Links */
+#navbar-main {
+    display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex; /* Make top-level menu items horizontal */
 }
 
-nav li {
-    position: relative; /* Needed for dropdown positioning */
-    margin-left: 20px; /* Space between top-level menu items */
+#navbar-main li {
+    margin: 0 10px;
+    position: relative; /* For dropdown positioning */
 }
 
-nav a {
-    color: white;
+#navbar-main a {
     text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 4px;
+    font-family: Impact, sans-serif;
+    font-size: 1.2em; /* Smaller font for menu items */
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 10px 15px; /* Adjust padding for button-like appearance */
+    border-radius: 5px; /* Slightly rounded corners */
     transition: background-color 0.3s ease;
-    display: block; /* Make links fill their list item space */
 }
 
-nav a:hover {
-    background-color: #555;
+#navbar-main a:hover {
+    background-color: hsla(0, 56%, 40%, 0.95); /* Highlight on hover */
+    color: white; /* Maintain white text on hover */
 }
 
-nav a.active {
-    background-color: #007bff; /* Highlight for active page */
+#navbar-main a:active {
+    color: rgb(255, 255, 255);
 }
 
-/* --- Dropdown Specific Styling --- */
-.dropdown .nav-button {
-    cursor: pointer;
-}
-
+/* Dropdown Menu Styles */
 .dropdown-content {
     display: none; /* Hidden by default */
     position: absolute;
-    background-color: #444; /* Darker background for dropdown */
-    min-width: 120px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    background-color: hsla(197, 64%, 23%, 0.95);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+    z-index: 1000;
     left: 0; /* Align dropdown to the left of its parent */
     top: 100%; /* Position below the parent link */
-    padding: 0;
-    margin: 0;
-    border-radius: 0 0 4px 4px; /* Rounded bottom corners */
+    border-radius: 0 0 5px 5px;
+    padding: 5px 0; /* Adjust padding for dropdown items */
 }
 
 .dropdown-content li {
-    margin: 0; /* Remove margin for dropdown items */
+    margin: 0;
 }
 
 .dropdown-content a {
@@ -98,61 +106,106 @@ nav a.active {
     text-decoration: none;
     display: block;
     text-align: left;
+    font-size: 1em; /* Adjust font size for dropdown items */
+    font-family: 'Space Mono', monospace; /* Use Space Mono for dropdown */
+    border-radius: 0; /* Remove border-radius for inner links */
 }
 
 .dropdown-content a:hover {
-    background-color: #666;
+    background-color: hsla(0, 56%, 40%, 0.95);
 }
 
-/* Show the dropdown menu on click/toggle via JS */
 .dropdown.show .dropdown-content {
     display: block;
 }
 
-/* --- Welcome User Display --- */
+/* Header Right - Welcome User */
+.header-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Push to the right */
+    padding-left: 20px; /* Space from navigation */
+}
+
 #welcomeUserDisplay {
     color: #e0e0e0;
     font-size: 1em;
     padding: 5px 10px;
     background-color: #555;
     border-radius: 4px;
-    margin-left: 20px; /* Space from right edge or other elements */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Empty div to balance space on the left */
+.empty-left {
+    flex-grow: 1; /* Takes up space on the left */
+    max-width: 200px; /* Limit its growth to match header-right potentially */
 }
 
 
-/* --- Content Wrapper & Page Sections --- */
+/* Content Wrapper & Page Sections */
 .content-wrapper {
-    padding: 20px; /* Padding for the main content area */
+    padding-top: 100px; /* Adjust for fixed navbar height */
+    max-width: 800px; /* Max width for the entire page content */
+    margin: 0 auto; /* Center the body content */
+    text-align: center;
+    min-height: calc(100vh - 100px); /* Ensure content area takes full height below navbar */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .page-section {
-    max-width: 400px; /* Keep main content width consistent with original */
-    margin: 20px auto; /* Center individual sections */
-    text-align: center;
+    width: 100%; /* Take full width of content-wrapper */
+    max-width: 600px; /* Max width for inner section content */
+    margin: 20px auto; /* Center individual sections within content-wrapper */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: white;
 }
 
-/* --- Existing Login/Content Styling --- */
+/* Existing Login/Content Styling */
 input, button {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     font-size: 16px;
     box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: hsla(197, 64%, 23%, 0.95);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: hsla(0, 56%, 40%, 0.95);
 }
 
 #regenerateBtn {
-    /* This button is part of the login section content */
     display: none;
+    background-color: #28a745;
+}
+
+#regenerateBtn:hover {
+    background-color: #218838;
 }
 
 #status, #roleDisplay {
     margin-top: 20px;
     font-weight: bold;
+    color: #eee;
 }
 
 /* Articles container styling */
 #articlesContainer {
-    margin-top: 0; /* Adjusted as it's inside a page-section now */
+    margin-top: 0;
     text-align: left;
 }
 
@@ -161,7 +214,7 @@ input, button {
     border: 2px solid black;
     padding: 20px;
     margin-bottom: 20px;
-    color: #333; /* Changed to a darker color for better readability on light blue */
+    color: #333;
     border-radius: 6px;
 }
 
@@ -177,4 +230,9 @@ input, button {
     border-radius: 50%;
     margin-right: 10px;
     object-fit: cover;
+}
+
+/* Ensure the main content is visible below the fixed header */
+body {
+    padding-top: 100px; /* Height of the navbar */
 }
