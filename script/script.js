@@ -19,8 +19,8 @@ const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const loginBtn = document.getElementById('loginBtn');
 const regenerateBtn = document.getElementById('regenerateBtn');
-const status = document.getElementById('status'); // Still used for internal status
-const roleDisplay = document.getElementById('roleDisplay'); // Still used for internal role display
+const status = document.getElementById('status');
+const roleDisplay = document.getElementById('roleDisplay');
 
 // Menu elements
 const authMenuDropdown = document.getElementById('authMenuDropdown');
@@ -52,14 +52,14 @@ function showPage(pageId) {
     riseDishonoredPage.style.display = 'none';
 
     // Remove 'active' class from all top-level nav links
-    document.querySelectorAll('nav > ul > li > a').forEach(link => {
+    document.querySelectorAll('#navbar-main > li > a').forEach(link => {
         link.classList.remove('active');
     });
 
     // Show the requested page and set active class
     if (pageId === 'login') {
         loginSection.style.display = 'block';
-        navAuthTrigger.classList.add('active'); // Activate the "Login" button itself
+        // Note: navAuthTrigger becomes the user's email, so don't set it active
     } else if (pageId === 'riseDishonored') {
         riseDishonoredPage.style.display = 'block';
         navRiseDishonored.classList.add('active');
@@ -77,23 +77,19 @@ navAuthTrigger.addEventListener('click', (e) => {
 
 // Close the dropdown if the user clicks outside of it
 window.addEventListener('click', (event) => {
-    if (!event.target.matches('.nav-button')) { // If click is not on the button
+    // Check if the click is outside the dropdown itself or its trigger
+    if (!authMenuDropdown.contains(event.target)) {
         if (authMenuDropdown.classList.contains('show')) {
             authMenuDropdown.classList.remove('show');
         }
     }
 });
 
-
 // --- Event Listeners for Navigation Links ---
-// The login link is handled by the navAuthTrigger and Firebase state
-// navLogin.addEventListener('click', (e) => { e.preventDefault(); showPage('login'); }); // No longer needed with new structure
-
 navRiseDishonored.addEventListener('click', (e) => {
     e.preventDefault();
     showPage('riseDishonored');
 });
-
 
 // --- Firebase Auth State Listener ---
 onAuthStateChanged(auth, user => {
@@ -107,14 +103,11 @@ onAuthStateChanged(auth, user => {
 
         // Update menu for logged-in state
         navAuthTrigger.textContent = user.email; // Change "Login" to user's email
-        navAuthTrigger.classList.remove('active'); // Remove active from the trigger if already active
         navLogout.style.display = 'block'; // Show logout link in dropdown
-        authMenuDropdown.classList.add('logged-in'); // Add class to manage dropdown styles if needed
-
+        
         // Display welcome message in top-right
         welcomeUserDisplay.textContent = `Welcome, ${user.email.split('@')[0]}!`; // Display username part of email
         welcomeUserDisplay.style.display = 'block';
-
 
         // Automatically show "Rise Dishonored Page" on login
         showPage('riseDishonored');
@@ -145,7 +138,6 @@ onAuthStateChanged(auth, user => {
         // Update menu for logged-out state
         navAuthTrigger.textContent = 'Login'; // Change back to "Login"
         navLogout.style.display = 'none'; // Hide logout link
-        authMenuDropdown.classList.remove('logged-in'); // Remove logged-in class
         welcomeUserDisplay.style.display = 'none'; // Hide welcome message
 
         // When logged out, show the login page
