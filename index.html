@@ -13,26 +13,26 @@
                 <a href="#" class="header-logo">Risetopia</a>
                 <div class="drop" id="menuDrop">↓</div> </div>
 
-            <div class="dropdown-menu" id="dropdownMenu">
-                <ul>
-                    <li><a href="#login-section">Login / User Info</a></li>
-                    <li><a href="#rise-dishonored-page" id="mobileNavRiseDishonored">Rise Dishonored Page</a></li>
-                    <li><a href="#" id="mobileNavLogout">Logout</a></li>
-                </ul>
-            </div>
-
             <nav>
                 <ul id="navbar-main">
-                    <li><a href="#rise-dishonored-page" id="navRiseDishonored">Rise Dishonored Page</a></li>
                     <li class="dropdown" id="authMenuDropdown">
                         <a href="#" id="navAuthTrigger" class="nav-button">Login</a>
                         <ul class="dropdown-content">
-                            <li><a href="#" id="navLogout">Logout</a></li>
+                            <li><a href="#" id="navLogout" style="display: none;">Logout</a></li>
                         </ul>
                     </li>
+                    <li><a href="#rise-dishonored-page" id="navRiseDishonored">Rise Dishonored Page</a></li>
                 </ul>
             </nav>
             
+            <div class="dropdown-menu" id="dropdownMenu">
+                <ul>
+                    <li><a href="#login-section" id="mobileAuthLink">Login / User Info</a></li>
+                    <li><a href="#rise-dishonored-page" id="mobileNavRiseDishonored">Rise Dishonored Page</a></li>
+                    <li><a href="#" id="mobileNavLogout" style="display: none;">Logout</a></li>
+                </ul>
+            </div>
+
             <div class="header-right">
                 <span id="welcomeUserDisplay" style="display: none;"></span>
             </div>
@@ -68,5 +68,5 @@
     </div>
 
     <script type="module" src="script/script.js"></script>
-    </body>
+</body>
 </html>
