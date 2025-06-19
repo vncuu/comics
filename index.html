@@ -9,21 +9,27 @@
 <body>
     <section class="navbar">
         <div class="container">
-            <div class="empty-left"></div>
-
-            <div class="logo-centered">
+            <div class="logo">
                 <a href="#" class="header-logo">Risetopia</a>
+                <div class="drop" id="menuDrop">↓</div> </div>
+
+            <div class="dropdown-menu" id="dropdownMenu">
+                <ul>
+                    <li><a href="#login-section">Login / User Info</a></li>
+                    <li><a href="#rise-dishonored-page" id="mobileNavRiseDishonored">Rise Dishonored Page</a></li>
+                    <li><a href="#" id="mobileNavLogout">Logout</a></li>
+                </ul>
             </div>
 
             <nav>
                 <ul id="navbar-main">
+                    <li><a href="#rise-dishonored-page" id="navRiseDishonored">Rise Dishonored Page</a></li>
                     <li class="dropdown" id="authMenuDropdown">
                         <a href="#" id="navAuthTrigger" class="nav-button">Login</a>
                         <ul class="dropdown-content">
                             <li><a href="#" id="navLogout">Logout</a></li>
                         </ul>
                     </li>
-                    <li><a href="#rise-dishonored-page" id="navRiseDishonored">Rise Dishonored Page</a></li>
                 </ul>
             </nav>
             
@@ -62,5 +68,5 @@
     </div>
 
     <script type="module" src="script/script.js"></script>
-</body>
+    </body>
 </html>
