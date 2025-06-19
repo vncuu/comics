@@ -1,191 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Risetopia Login</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 400px;
-      margin: 50px auto;
-      text-align: center;
-    }
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-    #logoutBtn, #regenerateBtn {
-      display: none;
-    }
-    #status, #roleDisplay {
-      margin-top: 20px;
-      font-weight: bold;
-    }
-    /* Articles container styling */
-    #articlesContainer {
-      margin-top: 40px;
-      display: none; /* hidden by default */
-      text-align: left;
-    }
-    .articleBox {
-      background-color: #bbe5ff;
-      border: 2px solid black;
-      padding: 20px;
-      margin-bottom: 20px;
-      color: #c9a0ec;
-      border-radius: 6px;
-    }
-    .socialMediaHeader {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .socialMediaHeader img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-right: 10px;
-      object-fit: cover;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <title>Risetopia Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Login to Risetopia</h2>
+    <header>
+        <a href="#" class="header-logo">Risetopia</a>
+        <nav>
+            <ul>
+                <li><a href="#login-section" id="navLogin">Login</a></li>
+                <li><a href="#logout" id="navLogout" style="display: none;">Logout</a></li>
+                <li><a href="#rise-dishonored-page" id="navRiseDishonored">Rise Dishonored Page</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <input type="email" id="email" placeholder="Email" />
-  <input type="password" id="password" placeholder="Password" />
+    <div class="content-wrapper">
+        <div id="login-section" class="page-section">
+            <h2>Login to Risetopia</h2>
+            <input type="email" id="email" placeholder="Email" />
+            <input type="password" id="password" placeholder="Password" />
+            <button id="loginBtn">Login</button>
+            <button id="regenerateBtn">Regenerate Code</button>
+            <div id="status">Not logged in</div>
+            <div id="roleDisplay"></div>
+        </div>
 
-  <button id="loginBtn">Login</button>
-  <button id="logoutBtn">Logout</button>
-  <button id="regenerateBtn">Regenerate Code</button>
-
-  <div id="status">Not logged in</div>
-  <div id="roleDisplay"></div>
-
-  <!-- Articles container hidden by default -->
-  <div id="articlesContainer">
-    <div class="articleBox">
-      <h3>NEW THINGS</h3>
-      <p><strong>Rise Dishonored</strong> is working on 3D models and animations. We are also gonna get a domain for our certain needs and use it wisely for any streaming tv purposes and in or advantage</p>
+        <div id="rise-dishonored-page" class="page-section" style="display: none;">
+            <div id="articlesContainer">
+                <div class="articleBox">
+                    <h3>NEW THINGS</h3>
+                    <p><strong>Rise Dishonored</strong> is working on 3D models and animations. We are also gonna get a domain for our certain needs and use it wisely for any streaming tv purposes and in our advantage</p>
+                </div>
+                <div class="articleBox">
+                    <div class="socialMediaHeader">
+                        <img src="images/winton.gif" alt="Icon" />
+                        <h3 style="margin: 0;">SOCIAL MEDIA ACCESS</h3>
+                    </div>
+                    <p><strong>Soon our advertising of both the risetopiahd & Rise Dishonored media will be available to everyone</strong></p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="articleBox">
-      <div class="socialMediaHeader">
-        <img src="winton.gif" alt="Icon" />
-        <h3 style="margin: 0;">SOCIAL MEDIA ACCESS</h3>
-      </div>
-      <p><strong>Soon our advertising of both the risetopiahd & Rise Dishonored media will be available to everyone</strong></p>
-    </div>
-  </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAOaULLFRJPWko_rVuJqhugCDi8wJzl1WE",
-      authDomain: "rise-80783.firebaseapp.com",
-      projectId: "rise-80783",
-      storageBucket: "rise-80783.appspot.com",
-      messagingSenderId: "569657077839",
-      appId: "1:569657077839:web:2fe104e4a7f00b7226fa3a",
-      measurementId: "G-DW52DVE31M"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const loginBtn = document.getElementById('loginBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const regenerateBtn = document.getElementById('regenerateBtn');
-    const status = document.getElementById('status');
-    const roleDisplay = document.getElementById('roleDisplay');
-    const articlesContainer = document.getElementById('articlesContainer');
-
-    let currentCode = '';
-
-    function generateRandomCode() {
-      return Math.floor(10000000 + Math.random() * 90000000).toString();
-    }
-
-    function displayOwnerCode() {
-      currentCode = generateRandomCode();
-      roleDisplay.textContent = `2FA Backup Code: ${currentCode}`;
-      regenerateBtn.style.display = 'block';
-    }
-
-    onAuthStateChanged(auth, user => {
-      if (user) {
-        status.textContent = `Logged in as: ${user.email}`;
-        loginBtn.style.display = 'none';
-        logoutBtn.style.display = 'block';
-        emailInput.style.display = 'none';
-        passwordInput.style.display = 'none';
-
-        // Show articles for everyone logged in
-        articlesContainer.style.display = 'block';
-
-        if (user.email === 'gogo.lindor@gmail.com') {
-          displayOwnerCode();
-        } else {
-          const roles = {
-            "admin1@example.com": "Admin",
-            "staff1@example.com": "Staff",
-            "moderator@example.com": "Moderator"
-          };
-          const role = roles[user.email] || "User";
-          roleDisplay.textContent = `Welcome ${role}`;
-          regenerateBtn.style.display = 'none';
-        }
-      } else {
-        status.textContent = 'Not logged in';
-        loginBtn.style.display = 'block';
-        logoutBtn.style.display = 'none';
-        emailInput.style.display = 'block';
-        passwordInput.style.display = 'block';
-        roleDisplay.textContent = '';
-        regenerateBtn.style.display = 'none';
-
-        // Hide articles when logged out
-        articlesContainer.style.display = 'none';
-      }
-    });
-
-    loginBtn.addEventListener('click', () => {
-      const email = emailInput.value.trim();
-      const password = passwordInput.value.trim();
-      if (!email || !password) {
-        alert('Please enter email and password.');
-        return;
-      }
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          alert('Logged in successfully!');
-        })
-        .catch(error => {
-          alert('Login failed: ' + error.message);
-        });
-    });
-
-    logoutBtn.addEventListener('click', () => {
-      signOut(auth)
-        .then(() => {
-          alert('Logged out!');
-        })
-        .catch(error => {
-          alert('Logout failed: ' + error.message);
-        });
-    });
-
-    regenerateBtn.addEventListener('click', () => {
-      currentCode = generateRandomCode();
-      roleDisplay.textContent = `Welcome Owner! Code: ${currentCode}`;
-    });
-  </script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
