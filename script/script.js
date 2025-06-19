@@ -77,7 +77,7 @@ navAuthTrigger.addEventListener('click', (e) => {
 
 // Close the dropdown if the user clicks outside of it
 window.addEventListener('click', (event) => {
-    if (!event.target.matches('.nav-button')) {
+    if (!event.target.matches('.nav-button')) { // If click is not on the button
         if (authMenuDropdown.classList.contains('show')) {
             authMenuDropdown.classList.remove('show');
         }
@@ -86,10 +86,8 @@ window.addEventListener('click', (event) => {
 
 
 // --- Event Listeners for Navigation Links ---
-navLogin.addEventListener('click', (e) => {
-    e.preventDefault();
-    showPage('login');
-});
+// The login link is handled by the navAuthTrigger and Firebase state
+// navLogin.addEventListener('click', (e) => { e.preventDefault(); showPage('login'); }); // No longer needed with new structure
 
 navRiseDishonored.addEventListener('click', (e) => {
     e.preventDefault();
