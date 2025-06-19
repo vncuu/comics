@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px; /* Increased max-width for better menu display */
+    margin: 0 auto; /* Center the body content */
+    padding-top: 60px; /* Space for fixed header */
+    text-align: center;
+}
+
+/* --- Header and Navigation Styling --- */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    position: fixed; /* Fix header to the top */
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-sizing: border-box; /* Include padding in width calculation */
+    z-index: 1000; /* Ensure it's above other content */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space out logo and nav */
+    align-items: center; /* Vertically align items */
+}
+
+.header-logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0;
+    color: white; /* Ensure logo text is white */
+    text-decoration: none; /* Remove underline from logo link */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Make menu items horizontal */
+}
+
+nav li {
+    margin-left: 20px; /* Space between menu items */
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #555;
+}
+
+nav a.active {
+    background-color: #007bff; /* Highlight for active page */
+}
+
+/* --- Content Wrapper & Page Sections --- */
+.content-wrapper {
+    padding: 20px; /* Padding for the main content area */
+}
+
+.page-section {
+    max-width: 400px; /* Keep main content width consistent with original */
+    margin: 20px auto; /* Center individual sections */
+    text-align: center;
+}
+
+/* --- Existing Login/Content Styling --- */
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#regenerateBtn {
+    /* This button is part of the login section content */
+    display: none;
+}
+
+#status, #roleDisplay {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Articles container styling */
+#articlesContainer {
+    margin-top: 0; /* Adjusted as it's inside a page-section now */
+    text-align: left;
+}
+
+.articleBox {
+    background-color: #bbe5ff;
+    border: 2px solid black;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: #333; /* Changed to a darker color for better readability on light blue */
+    border-radius: 6px;
+}
+
+.socialMediaHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.socialMediaHeader img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
