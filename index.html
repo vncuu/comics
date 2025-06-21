@@ -6,14 +6,15 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <section class="navbar">
+  <!-- Navbar (hidden until login) -->
+  <section class="navbar" id="navbar" style="display: none;">
     <div class="logo">
       <img src="images/winton.gif" alt="Logo">
       <div id="menuDrop" class="drop">↓</div>
     </div>
     <nav>
       <ul id="navbar-main">
-        <li><a href="#" id="navRiseDishonored" class="disabled">Rise Dishonored</a></li>
+        <li><a href="#" id="navRiseDishonored">Rise Dishonored</a></li>
         <li><a href="#" id="navAuthTrigger">Login</a>
           <ul id="authMenuDropdown" class="dropdown-menu">
             <li><a href="#" id="navLogout">Logout</a></li>
@@ -22,31 +23,32 @@
       </ul>
     </nav>
     <div class="empty"></div>
-    <div id="welcomeUserDisplay" class="welcome-user" style="display:none;"></div>
+    <div id="welcomeUserDisplay" class="welcome-user"></div>
   </section>
 
   <div class="container">
+    <!-- Login Section -->
     <div id="login-section" class="page-section">
       <h2>Login to Risetopia</h2>
       <input type="email" id="email" placeholder="Email" />
       <input type="password" id="password" placeholder="Password" />
       <button id="loginBtn">Login</button>
       <div id="status">Not logged in</div>
-      <div id="roleDisplay"></div>
     </div>
 
+    <!-- Protected Content -->
     <div id="rise-dishonored-page" class="page-section" style="display: none;">
       <h3>NEW THINGS</h3>
       <p><strong>Rise Dishonored</strong> is working on 3D models and animations. We are also going to get a domain for streaming, advertising, and other media purposes.</p>
     </div>
   </div>
 
-  <!-- Mobile Dropdown -->
+  <!-- Mobile Dropdown Menu -->
   <div id="dropdownMenu" class="dropdown-menu">
     <ul>
       <li><a href="#" id="mobileNavUser">Login / User Info</a></li>
-      <li><a href="#" id="mobileNavRiseDishonored" class="disabled">Rise Dishonored</a></li>
-      <li><a href="#" id="mobileNavLogout" style="display:none;">Logout</a></li>
+      <li><a href="#" id="mobileNavRiseDishonored">Rise Dishonored</a></li>
+      <li><a href="#" id="mobileNavLogout">Logout</a></li>
     </ul>
   </div>
 
