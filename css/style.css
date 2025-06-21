@@ -12,89 +12,54 @@ html, body {
 
 /* Navbar */
 .navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 80px;
+  position: fixed; top: 0; width: 100%; height: 80px;
   background: hsla(197,64%,23%,.95);
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  z-index: 100;
+  display: flex; align-items: center; padding: 0 20px; z-index: 100;
 }
+
 .navbar .logo { display: flex; align-items: center; }
 .navbar .drop { font-size: 1.5em; margin-left: 8px; cursor: pointer; user-select: none; }
 .navbar ul { display: flex; list-style: none; gap: 20px; align-items: center; }
 .navbar a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.1em;
-  position: relative;
+  color: #fff; text-decoration: none; font-size: 1.1em; position: relative;
 }
-.navbar a:hover { background: hsla(0,56%,40%,.95); padding: 4px 8px; border-radius: 4px; }
+.navbar a.disabled { opacity: 0.5; pointer-events: none; }
+.navbar a:hover:not(.disabled) { background: hsla(0,56%,40%,.95); padding: 4px 8px; border-radius: 4px; }
 .welcome-user { font-size: 1em; margin-left: 16px; }
 
-/* Dropdown Menu Styles */
+/* Dropdowns */
 .dropdown-menu {
-  position: absolute;
-  top: 80px;
-  left: 0;
-  background: hsla(197,64%,23%,.95);
-  border-radius: 5px;
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(-10px);
+  position: absolute; top: 80px; left: 0;
+  background: hsla(197,64%,23%,.95); border-radius: 5px;
+  visibility: hidden; opacity: 0; transform: translateY(-10px);
   transition: visibility .2s, opacity .2s, transform .2s;
 }
 .dropdown-menu.show {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0);
+  visibility: visible; opacity: 1; transform: translateY(0);
 }
 .dropdown-menu ul { list-style: none; }
 .dropdown-menu li a {
-  display: block;
-  padding: 10px 16px;
-  font-size: 1em;
+  display: block; padding: 10px 16px; font-size: 1em;
 }
 .dropdown-menu li a:hover { background: hsla(0,56%,40%,.95); }
 
-/* Container & Sections */
+/* Container */
 .container { width: 100%; max-width: 800px; margin: 120px auto; padding: 0 20px; flex: 1; }
 .page-section { margin-top: 20px; }
+
+/* Login */
 #login-section input, #login-section button {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 12px;
-  font-size: 1em;
-  border-radius: 4px;
+  display: block; width: 100%; margin: 10px 0; padding: 12px;
+  font-size: 1em; border-radius: 4px;
 }
 #login-section input {
-  background: #2b2b2b;
-  border: 1px solid hsla(197,64%,40%,.95);
-  color: #fff;
+  background: #2b2b2b; border: 1px solid hsla(197,64%,40%,.95); color: #fff;
 }
-#login-section input:focus {
-  outline: none;
-  border-color: #00aaff;
-}
+#login-section input:focus { outline: none; border-color: #00aaff; }
 #loginBtn {
-  background: #00aaff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
+  background: #00aaff; color: #fff; border: none; cursor: pointer;
 }
 #loginBtn:hover { background: #008ecc; }
-#regenerateBtn {
-  background: #ffaa00;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-#regenerateBtn:hover { background: #cc8800; }
 
-#status {
-  margin: 10px 0;
-  font-weight: bold;
-}
+#status { margin: 10px 0; font-weight: bold; }
+
