@@ -1,73 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Risetopia</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Risetopia</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <section class="navbar">
-        <div class="container">
-            <div class="logo">
-                <img src="images/winton.gif" alt="Logo">
-                <div class="drop" id="menuDrop">↓</div>
-            </div>
+  <section class="navbar">
+    <div class="logo">
+      <img src="images/winton.gif" alt="Logo">
+      <div id="menuDrop" class="drop">↓</div>
+    </div>
+    <nav>
+      <ul id="navbar-main">
+        <li><a href="#" id="navHome">Home</a></li>
+        <li><a href="#" id="navRiseDishonored">Rise Dishonored</a></li>
+        <li><a href="#" id="navAuthTrigger">Login</a>
+          <ul id="authMenuDropdown" class="dropdown-menu">
+            <li><a href="#" id="navLogout">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div class="empty"></div>
+    <div id="welcomeUserDisplay" class="welcome-user" style="display:none;"></div>
+  </section>
 
-            <div class="dropdown-menu" id="dropdownMenu">
-                <ul>
-                    <li><a href="notes.html">Notes</a></li>
-                    <li><a href="release.html">Release Date</a></li>
-                    <li><a href="plan.html">Future Plans</a></li>
-                    <li><a href="https://risedishonored.com">Rise Dishonored Home</a></li> <!-- Example if it's a separate HTML -->
-                </ul>
-            </div>
-
-            <nav>
-                <ul id="navbar-main">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="https://store.steampowered.com/account/redeemwalletcode">Redeem Page</a></li>
-                    <li><a href="https://discord.com/channels/1350551099576287333/1381029554558341193</a>Support</li>
-                </ul>
-            </nav>
-
-            <div class="empty"></div>
-            <div id="discord">
-                <a href="https://discord.gg/DAXbU23nda">
-                    <img src="images/discord.png" alt="Discord" style="width: 50px; height: auto;">
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <div class="content-wrapper">
-        <div id="login-section" class="page-section">
-            <h2>Login to Risetopia</h2>
-            <input type="email" id="email" placeholder="Email" />
-            <input type="password" id="password" placeholder="Password" />
-            <button id="loginBtn">Login</button>
-            <button id="regenerateBtn">Regenerate Code</button>
-            <div id="status">Not logged in</div>
-            <div id="roleDisplay"></div>
-        </div>
-
-        <div id="rise-dishonored-page" class="page-section" style="display: none;">
-            <div id="articlesContainer">
-                <div class="articleBox">
-                    <h3>NEW THINGS</h3>
-                    <p><strong>Rise Dishonored</strong> is working on 3D models and animations. We are also gonna get a domain for our certain needs and use it wisely for any streaming tv purposes and in our advantage</p>
-                </div>
-                <div class="articleBox">
-                    <div class="socialMediaHeader">
-                        <img src="images/winton.gif" alt="Icon" />
-                        <h3 style="margin: 0;">SOCIAL MEDIA ACCESS</h3>
-                    </div>
-                    <p><strong>Soon our advertising of both the risetopiahd & Rise Dishonored media will be available to everyone</strong></p>
-                </div>
-            </div>
-        </div>
+  <div class="container">
+    <div id="login-section" class="page-section">
+      <h2>Login to Risetopia</h2>
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <button id="loginBtn">Login</button>
+      <button id="regenerateBtn" style="display:none;">Regenerate Code</button>
+      <div id="status">Not logged in</div>
+      <div id="roleDisplay"></div>
     </div>
 
-    <script type="module" src="script/script.js"></script>
+    <div id="rise-dishonored-page" class="page-section" style="display: none;">
+      <h3>NEW THINGS</h3>
+      <p><strong>Rise Dishonored</strong> is working on 3D models and animations. We are also gonna get a domain for our certain needs and use it wisely for any streaming tv purposes and in our advantage.</p>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown -->
+  <div id="dropdownMenu" class="dropdown-menu">
+    <ul>
+      <li><a href="#" id="mobileNavUser">Login / User Info</a></li>
+      <li><a href="#" id="mobileNavRiseDishonored">Rise Dishonored</a></li>
+      <li><a href="#" id="mobileNavLogout" style="display:none;">Logout</a></li>
+    </ul>
+  </div>
+
+  <script type="module" src="script/script.js"></script>
 </body>
 </html>
