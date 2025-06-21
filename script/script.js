@@ -1,118 +1,139 @@
-// ... Firebase config and auth setup remain unchanged ...
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
-// DOM references (no backupCodeEl anymore)
+// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyAOaULLFRJPWko_rVuJqhugCDi8wJzl1WE",
+  authDomain: "rise-80783.firebaseapp.com",
+  projectId: "rise-80783",
+  storageBucket: "rise-80783.appspot.com",
+  messagingSenderId: "569657077839",
+  appId: "1:569657077839:web:2fe104e4a7f00b7226fa3a",
+  measurementId: "G-DW52DVE31M"
+};
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+const auth = getAuth();
+
+// Get DOM elements
+const navbar = document.getElementById('navbar');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const loginBtn = document.getElementById('loginBtn');
-const statusEl = document.getElementById('status');
-const roleDisplay = document.getElementById('roleDisplay');
-
+const status = document.getElementById('status');
 const navAuthTrigger = document.getElementById('navAuthTrigger');
 const navLogout = document.getElementById('navLogout');
-const navRise = document.getElementById('navRiseDishonored');
+const navRiseDishonored = document.getElementById('navRiseDishonored');
 const menuDrop = document.getElementById('menuDrop');
 const dropdownMenu = document.getElementById('dropdownMenu');
-const mobileUser = document.getElementById('mobileNavUser');
-const mobileRise = document.getElementById('mobileNavRiseDishonored');
-const mobileLogout = document.getElementById('mobileNavLogout');
-const welcomeDisplay = document.getElementById('welcomeUserDisplay');
+const authMenuDropdown = document.getElementById('authMenuDropdown');
 
+const mobileNavUser = document.getElementById('mobileNavUser');
+const mobileNavRiseDishonored = document.getElementById('mobileNavRiseDishonored');
+const mobileNavLogout = document.getElementById('mobileNavLogout');
+
+const welcomeUserDisplay = document.getElementById('welcomeUserDisplay');
 const loginSection = document.getElementById('login-section');
-const risePage = document.getElementById('rise-dishonored-page');
+const riseDishonoredPage = document.getElementById('rise-dishonored-page');
 
+// Helper to show pages and hide others
 function showPage(page) {
   loginSection.style.display = 'none';
-  risePage.style.display = 'none';
-  document.querySelectorAll('#navbar-main a').forEach(a => a.classList.remove('active'));
-  document.querySelectorAll('#dropdownMenu a').forEach(a => a.classList.remove('active'));
+  riseDishonoredPage.style.display = 'none';
 
   if (page === 'login') {
     loginSection.style.display = 'block';
   } else if (page === 'rise') {
-    risePage.style.display = 'block';
-    navRise.classList.add('active');
-    mobileRise.classList.add('active');
+    riseDishonoredPage.style.display = 'block';
   }
 
   dropdownMenu.classList.remove('show');
-  document.getElementById('authMenuDropdown').classList.remove('show');
+  authMenuDropdown.classList.remove('show');
 }
 
-// Toggle menus
-menuDrop.addEventListener('click', e => {
+// Toggle mobile dropdown menu
+menuDrop.addEventListener('click', (e) => {
   e.preventDefault();
   dropdownMenu.classList.toggle('show');
 });
-window.addEventListener('click', e => {
+
+// Close dropdown if clicked outside
+window.addEventListener('click', (e) => {
   if (!menuDrop.contains(e.target) && !dropdownMenu.contains(e.target)) {
     dropdownMenu.classList.remove('show');
   }
 });
-navAuthTrigger.addEventListener('click', e => {
+
+// Toggle desktop auth dropdown
+navAuthTrigger.addEventListener('click', (e) => {
   e.preventDefault();
-  document.getElementById('authMenuDropdown').classList.toggle('show');
+  authMenuDropdown.classList.toggle('show');
 });
-window.addEventListener('click', e => {
-  if (!navAuthTrigger.contains(e.target) && !document.getElementById('authMenuDropdown').contains(e.target)) {
-    document.getElementById('authMenuDropdown').classList.remove('show');
+
+// Close auth dropdown if clicked outside
+window.addEventListener('click', (e) => {
+  if (!navAuthTrigger.contains(e.target) && !authMenuDropdown.contains(e.target)) {
+    authMenuDropdown.classList.remove('show');
   }
 });
 
-// Page nav
-navRise.addEventListener('click', e => { e.preventDefault(); showPage('rise'); });
-mobileRise.addEventListener('click', e => { e.preventDefault(); showPage('rise'); });
-mobileUser.addEventListener('click', e => { e.preventDefault(); showPage('login'); });
-
-navLogout.addEventListener('click', e => {
+// Desktop navigation clicks
+navRiseDishonored.addEventListener('click', (e) => {
   e.preventDefault();
-  signOut(auth);
-});
-mobileLogout.addEventListener('click', e => {
-  e.preventDefault();
-  signOut(auth);
+  showPage('rise');
 });
 
-// Auth
-onAuthStateChanged(auth, user => {
+// Mobile navigation clicks
+mobileNavRiseDishonored.addEventListener('click', (e) => {
+  e.preventDefault();
+  showPage('rise');
+});
+
+mobileNavUser.addEventListener('click', (e) => {
+  e.preventDefault();
+  showPage('login');
+});
+
+// Logout handlers
+navLogout.addEventListener('click', (e) => {
+  e.preventDefault();
+  signOut(auth).catch(error => alert('Logout failed: ' + error.message));
+});
+
+mobileNavLogout.addEventListener('click', (e) => {
+  e.preventDefault();
+  signOut(auth).catch(error => alert('Logout failed: ' + error.message));
+});
+
+// Monitor auth state changes
+onAuthStateChanged(auth, (user) => {
   if (user) {
-    statusEl.textContent = `Logged in as: ${user.email}`;
-    emailInput.style.display = 'none';
-    passwordInput.style.display = 'none';
-    loginBtn.style.display = 'none';
-
-    navAuthTrigger.textContent = user.email;
-    navLogout.style.display = 'block';
-    mobileLogout.style.display = 'block';
-    mobileUser.textContent = user.email;
-
-    welcomeDisplay.textContent = `Welcome, ${user.email.split('@')[0]}!`;
-    welcomeDisplay.style.display = 'block';
-
-    navRise.classList.remove('disabled');
-    mobileRise.classList.remove('disabled');
-
+    // User is logged in
+    navbar.style.display = 'flex';
     showPage('rise');
+    status.textContent = `Logged in as: ${user.email}`;
+    navAuthTrigger.textContent = user.email;
+    mobileNavUser.textContent = user.email;
+    welcomeUserDisplay.textContent = `Welcome, ${user.email.split('@')[0]}!`;
+    welcomeUserDisplay.style.display = 'block';
   } else {
-    statusEl.textContent = 'Not logged in';
-    emailInput.style.display = 'block';
-    passwordInput.style.display = 'block';
-    loginBtn.style.display = 'block';
-
+    // User logged out
+    navbar.style.display = 'none';
+    welcomeUserDisplay.style.display = 'none';
+    status.textContent = 'Not logged in';
     navAuthTrigger.textContent = 'Login';
-    navLogout.style.display = 'none';
-    mobileLogout.style.display = 'none';
-    mobileUser.textContent = 'Login / User Info';
-
-    welcomeDisplay.style.display = 'none';
-
-    navRise.classList.add('disabled');
-    mobileRise.classList.add('disabled');
-
+    mobileNavUser.textContent = 'Login / User Info';
     showPage('login');
   }
 });
 
-// Login
+// Login button logic
 loginBtn.addEventListener('click', () => {
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
@@ -122,7 +143,8 @@ loginBtn.addEventListener('click', () => {
     return;
   }
 
-  signInWithEmailAndPassword(auth, email, password).catch(err =>
-    alert('Login failed: ' + err.message)
-  );
+  signInWithEmailAndPassword(auth, email, password)
+    .catch(error => {
+      alert('Login failed: ' + error.message);
+    });
 });
