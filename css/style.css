@@ -11,160 +11,76 @@ html, body {
     overflow-x: hidden;
     background-color: #1a1a1a;
     font-family: 'Space Mono', monospace;
+    display: flex; /* Make body a flex container */
+    flex-direction: column; /* Stack children vertically */
+    min-height: 100vh; /* Ensure body takes full viewport height */
 }
 
-/* Navbar - Stays fixed at the top */
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
-    background-color: hsla(197, 64%, 23%, 0.95); /* Dishonored blue/green tone */
-    position: fixed; /* Key change: makes it stick to the top */
+    background-color: hsla(197, 64%, 23%, 0.95);
+    position: fixed; /* Keep navbar fixed at the top */
     width: 100%;
     z-index: 999;
     height: 100px;
     align-items: center;
     padding: 0 20px;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    top: 0; /* Ensures it's at the very top */
-    left: 0;
 }
 
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-/* Risetopia Logo - now pushed to the left, but remains visually centered for aesthetics */
-.logo {
-    display: flex;
-    align-items: center;
-    position: relative;
-    /* Removed flex-grow here to prevent it from pushing content too far */
-    padding-right: 20px; /* Space between logo and menu items */
-}
-
-.header-logo {
-    text-decoration: none;
-    font-family: Impact, sans-serif;
-    font-size: 2.5em;
-    letter-spacing: 0.05em;
-    color: white;
-    /* Added positioning to visually center it in the available space */
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap; /* Prevent text wrapping */
-}
-
-/* Mobile dropdown trigger (the '↓' icon) */
-.drop {
-    font-size: 2em;
-    cursor: pointer;
-    color: white;
-    user-select: none;
-    display: none; /* Hidden by default, shown via media query */
-    position: relative; /* Relative to .logo */
-    z-index: 1001; /* Ensure it's clickable above the logo text if needed */
-    margin-left: 10px; /* Space from logo */
-}
-
-/* Main Navigation (for larger screens) - now starts from the left after the logo */
-nav {
-    display: flex;
-    flex-grow: 1; /* Allows nav to take available space and push header-right to far right */
-    justify-content: flex-start; /* Aligns nav items to the left within the available space */
-    margin-left: 120px; /* Adjust this value to position the links after the logo visually */
-}
-
-#navbar-main {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#navbar-main li {
-    margin: 0 10px;
-    position: relative;
-}
-
-#navbar-main a {
+.navbar a {
     text-decoration: none;
     font-family: Impact, sans-serif;
     font-size: 1.5em;
     letter-spacing: 0.02em;
     color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    display: block;
-    white-space: nowrap;
+    margin: 0 10px;
 }
 
-#navbar-main a:hover {
-    background-color: hsla(0, 56%, 40%, 0.95); /* Dishonored red/orange tone on hover */
+.navbar a:hover {
+    background-color: hsla(0, 56%, 40%, 0.95);
     color: white;
 }
 
-#navbar-main a:active {
+.navbar a:active {
     color: rgb(255, 255, 255);
 }
 
-/* Authentication Dropdown (for desktop) */
-.dropdown-content {
-    display: none; /* Hidden by default */
-    position: absolute;
-    background-color: hsla(197, 64%, 23%, 0.95);
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1000;
-    left: 0;
-    top: 100%;
-    border-radius: 0 0 5px 5px;
-    padding: 5px 0;
-    list-style: none;
+.logo {
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
-.dropdown-content li {
-    margin: 0;
+.logo img {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
 }
 
-.dropdown-content a {
+.drop {
+    font-size: 2em;
+    margin-left: -5px;
+    cursor: pointer;
     color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    font-size: 1em;
-    font-family: 'Space Mono', monospace;
-    border-radius: 0;
+    user-select: none;
 }
 
-.dropdown-content a:hover {
-    background-color: hsla(0, 56%, 40%, 0.95);
-}
-
-.dropdown.show .dropdown-content {
-    display: block;
-}
-
-/* Mobile Dropdown Menu */
+/* Dropdown Menu Styles */
 .dropdown-menu {
-    position: fixed;
-    top: 100px; /* Below the navbar */
+    position: absolute;
+    top: 100%;
     left: 0;
-    width: 100%;
-    background-color: hsla(197, 64%, 23%, 0.98);
+    background-color: hsla(197, 64%, 23%, 0.95);
+    border-radius: 5px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-    z-index: 998;
+    z-index: 1000;
+    min-width: 200px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-20px);
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    padding: 10px 0;
-    list-style: none;
 }
 
 .dropdown-menu.show {
@@ -175,7 +91,7 @@ nav {
 
 .dropdown-menu ul {
     list-style: none;
-    padding: 0;
+    padding: 10px 0;
     margin: 0;
 }
 
@@ -186,13 +102,12 @@ nav {
 
 .dropdown-menu a {
     color: white;
-    padding: 12px 20px;
+    padding: 12px 16px;
     text-decoration: none;
     display: block;
     font-size: 1.2em;
-    text-align: center;
+    text-align: left;
     margin: 0;
-    font-family: 'Space Mono', monospace;
 }
 
 .dropdown-menu a:hover {
@@ -200,163 +115,545 @@ nav {
     color: white;
 }
 
-/* Header Right - Welcome User (always on the far right) */
-.header-right {
+.container {
     display: flex;
     align-items: center;
-    margin-left: auto; /* Pushes it to the far right */
-    padding-left: 20px;
+    justify-content: space-between;
+    width: 100%;
 }
 
-#welcomeUserDisplay {
-    color: #e0e0e0;
-    font-size: 1em;
-    padding: 5px 10px;
-    background-color: #555;
-    border-radius: 4px;
+#navbar-main { /* Specific ID for the main navigation to avoid conflict */
+    display: flex;
+    list-style: none;
+}
+
+#navbar-main li {
+    margin: 0 10px;
+}
+
+.empty {
+    flex-grow: 1;
+}
+
+#discord img {
+    height: 75px;
+    width: 75px;
+}
+
+/* --- Rise Dishonored Specific Styles (risendishonored.html) --- */
+/* Main Content (Hero Section) */
+.top {
+    margin-top: 0px; /* Pushes it down past the fixed navbar */
+    padding-top: 0;
+    padding-bottom: 40px; /* Space below the main-bar */
+    background: none; /* Remove any specific background from .top */
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    background: url('../images/bg2.png') no-repeat center center; /* Background image for the .main div */
+    background-size: cover; /* Cover the entire section */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px; /* Give .main a minimum height to properly show the background */
+    padding-top: 100px; /* Adjust padding for fixed navbar */
+}
+
+.main-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
     white-space: nowrap;
-}
-
-/* Ensure body content starts below the fixed navbar */
-body {
-    padding-top: 100px; /* Height of the fixed navbar */
-}
-
-/* Content Wrapper & Page Sections */
-.content-wrapper {
-    max-width: 800px;
-    margin: 20px auto;
-    text-align: center;
-    min-height: calc(100vh - 100px - 40px);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.page-section {
-    width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
-
-/* Existing Login/Content Styling */
-input, button {
-    width: 100%;
     padding: 10px;
-    margin: 10px 0;
-    font-size: 16px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.164);
+    border: 10px solid rgba(0, 0, 0, 0.637);
+    max-width: 100%;
 }
 
-button {
-    background-color: hsla(197, 64%, 23%, 0.95);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: hsla(0, 56%, 40%, 0.95);
-}
-
-#regenerateBtn {
+.main-bar::-webkit-scrollbar {
     display: none;
-    background-color: #28a745;
 }
 
-#regenerateBtn:hover {
-    background-color: #218838;
+.main-bar > div {
+    min-width: 300px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    flex-shrink: 0;
 }
 
-#status, #roleDisplay {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #eee;
+.main-bar:active {
+    cursor: grabbing;
 }
 
-/* Articles container styling */
-#articlesContainer {
-    margin-top: 0;
-    text-align: left;
+.main-bar:hover {
+    cursor: grab;
 }
 
-.articleBox {
-    background-color: #bbe5ff;
-    border: 2px solid black;
+/* Trailer Section */
+.trailer-section {
+    position: relative;
+    width: 1345px; /* Consider making this responsive, e.g., max-width: 100% */
+    height: 800px; /* Consider making this responsive, e.g., height: 70vh */
+    overflow: hidden;
+    background: black;
+    margin-top: 100px; /* Push down to clear fixed navbar */
+}
+
+.centered-image {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    pointer-events: none;
+    z-index: 15;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.video-wrapper video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 0;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 1;
     padding: 20px;
-    margin-bottom: 20px;
-    color: #333;
-    border-radius: 6px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
-.socialMediaHeader {
-    display: flex;
-    align-items: center;
+.video-overlay h1 {
+    font-size: 3em;
     margin-bottom: 10px;
 }
 
-.socialMediaHeader img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+.video-overlay p {
+    font-size: 1.2em;
+}
+
+/* Badge Style */
+.availability-box {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 16px 24px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    z-index: 10;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 0.8s ease;
+}
+
+.availability-box-header {
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #ffffffaa;
+    margin-bottom: 6px;
+    font-family: 'Space Mono', monospace;
+}
+
+.availability-links a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.availability-links img {
+    height: 32px;
+    width: auto;
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Third Section (Coming Soon & Reviews) */
+.third {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    flex-wrap: wrap;
+    background-image: url('../images/bg1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    gap: 40px;
+    align-items: center;
+    background-color: transparent;
+    padding: 60px 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
+
+.content-wrapper h1 {
+    font-size: 3em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.content-wrapper p {
+    font-size: 1.2em;
+    max-width: 600px;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.soon {
+    display: none;
+}
+
+.reviews {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(160, 158, 158, 0.27);
+    padding: 20px;
+    margin: 0 20px;
+    border-radius: 10px;
+    max-height: 500px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.reviews h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #000;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.review-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    border-color: rgb(100, 144, 226);
+}
+
+.reviewer {
+    margin-top: 10px;
+    font-style: italic;
+    color: #ddcb29f1;
+}
+
+/* Smooth navbar hide/show */
+.hidden-navbar {
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.navbar {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Cursor feedback for drag scrolling */
+.main-bar {
+    cursor: grab;
+}
+
+.main-bar.active {
+    cursor: grabbing;
+}
+
+/* --- Knights TV (index.html) Specific Styles --- */
+#player-container {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    padding-top: 100px; /* Add padding to account for fixed navbar */
+}
+
+#twitch-embed {
+    width: 80vw;
+    height: 80vh;
+    max-width: 1280px;
+    max-height: 720px;
+}
+
+.nav-buttons {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.nav-buttons button { /* Specificity for buttons within nav-buttons */
+    pointer-events: auto;
+    background-color: rgba(0, 170, 255, 0.7);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.nav-buttons button:hover {
+    background-color: rgba(0, 170, 255, 1);
+}
+
+/* --- Form (form.html) Specific Styles --- */
+.form-container {
+    flex-grow: 1; /* Allows form content to take available space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    padding-top: 120px; /* Adjust padding for fixed navbar */
+    color: white; /* Ensure text is visible */
+    width: 100%; /* Take full width */
+}
+
+.form-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+form {
+    background: hsla(197, 64%, 23%, 0.75); /* Dark blue, semi-transparent to match navbar */
+    padding: 2.5rem;
+    border-radius: 8px;
+    max-width: 500px; /* Slightly wider form for better input spacing */
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+input {
+    display: block;
+    margin: 1.2rem 0; /* More vertical space between inputs */
+    padding: 0.8rem; /* Larger padding for easier input */
+    width: 100%;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    border: 1px solid hsla(197, 64%, 40%, 0.95); /* Lighter blue border */
+    background: #2b2b2b; /* Slightly lighter dark background for input */
+    color: white;
+}
+
+input::placeholder {
+    color: #ccc; /* Lighter placeholder text */
+}
+
+input:focus {
+    outline: none;
+    border-color: #00aaff; /* Highlight on focus */
+    box-shadow: 0 0 8px rgba(0, 170, 255, 0.5);
+}
+
+/* Note: Button style for form is now combined but might need specific overrides if it differs from other buttons */
+/* The main button style from the original "Knights TV" CSS now applies to all buttons,
+   so we'll modify the form's button to ensure it uses the desired reddish-orange. */
+.form-container button[type="submit"] {
+    background-color: hsla(0, 56%, 40%, 0.95); /* Reddish-orange button to stand out */
+    border: none;
+    padding: 1rem; /* Larger button */
+    width: 100%;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 1.5rem; /* More space above button */
+    transition: background-color 0.3s ease;
+}
+
+.form-container button[type="submit"]:hover {
+    background-color: hsla(0, 56%, 50%, 0.95); /* Lighter red on hover */
+}
+
+.confirmation {
+    margin-top: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* --- About Page Specific Styles (about.html) --- */
+.content-section.about-page {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align content to the top */
+    padding: 2rem;
+    padding-top: 120px; /* Adjust padding for fixed navbar */
+    color: white;
+    width: 100%;
+    max-width: 900px; /* Max width for content */
+    margin: 0 auto; /* Center the content */
+    line-height: 1.6;
+    text-align: left;
+}
+
+.content-section.about-page h1 {
+    font-size: 3em;
+    margin-bottom: 30px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    width: 100%;
+}
+
+.content-section.about-page h2 {
+    font-size: 2em;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #00aaff; /* Blue like your buttons */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    text-align: left;
+}
+
+.content-section.about-page p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: #ddd;
+    text-align: left;
+}
+
+.content-section.about-page .game-details ul,
+.content-section.about-page .external-links ul {
+    list-style: none; /* Remove default bullets */
+    padding-left: 0;
+    width: 100%;
+}
+
+.content-section.about-page .game-details li,
+.content-section.about-page .external-links li {
+    background-color: hsla(197, 64%, 23%, 0.7); /* Dark blue, slightly transparent */
+    margin-bottom: 10px;
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: 1px solid hsla(197, 64%, 40%, 0.95);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.content-section.about-page .game-details li strong {
+    color: #bbe5ff; /* Lighter blue for key terms */
+    min-width: 120px; /* Ensure alignment for details */
     margin-right: 10px;
-    object-fit: cover;
 }
 
-/* Media Queries for Responsiveness */
-
-/* Hide desktop nav and show mobile dropdown trigger */
-@media (max-width: 768px) {
-    #navbar-main {
-        display: none; /* Hide main desktop navigation */
-    }
-
-    .drop {
-        display: block; /* Show the mobile dropdown trigger */
-    }
-
-    .logo {
-        justify-content: flex-start; /* Align logo to the left, as dropdown trigger is also left */
-        padding-right: 0; /* Remove padding */
-    }
-
-    .header-logo {
-        position: relative; /* Reset positioning for mobile logo */
-        left: auto;
-        transform: none;
-        margin-left: 50px; /* Space from the dropdown trigger */
-    }
-    
-    nav {
-        margin-left: 0; /* Remove margin from nav */
-    }
+.content-section.about-page .game-details ul ul { /* For nested language list */
+    padding-left: 20px;
+    margin-top: 5px;
+    background: none;
+    border: none;
+    display: block;
+}
+.content-section.about-page .game-details ul ul li {
+    background: none;
+    border: none;
+    padding: 5px 0;
+    margin-bottom: 0;
 }
 
-/* Further adjustments for very small screens if needed */
-@media (max-width: 480px) {
-    .navbar {
-        height: 80px;
-    }
-    body {
-        padding-top: 80px;
-    }
-    .header-logo {
-        font-size: 2em;
-        margin-left: 40px; /* Adjust spacing for smaller drop icon */
-    }
-    .drop {
-        font-size: 1.8em;
-    }
-    .dropdown-menu {
-        top: 80px;
-    }
+.content-section.about-page .external-links a {
+    color: #00aaff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.content-section.about-page .external-links a:hover {
+    color: #0088cc;
+    text-decoration: underline;
+}
+
+.content-section.about-page .notes {
+    background-color: hsla(0, 56%, 40%, 0.2); /* Slightly red for 'notes' */
+    border: 1px solid hsla(0, 56%, 40%, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.content-section.about-page .notes p {
+    color: #ffcccc; /* Lighter red for notes text */
+    font-style: italic;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+/* Footer (consistent across all pages) */
+.footer {
+    margin-top: auto; /* Pushes footer to the bottom */
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    background-color: hsla(197, 64%, 23%, 0.95); /* Matches other pages */
+    width: 100%;
 }
