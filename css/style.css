@@ -1,659 +1,100 @@
 /* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    background-color: #1a1a1a;
-    font-family: 'Space Mono', monospace;
-    display: flex; /* Make body a flex container */
-    flex-direction: column; /* Stack children vertically */
-    min-height: 100vh; /* Ensure body takes full viewport height */
+  background-color: #1a1a1a;
+  color: white;
+  font-family: 'Space Mono', monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Navbar */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    background-color: hsla(197, 64%, 23%, 0.95);
-    position: fixed; /* Keep navbar fixed at the top */
-    width: 100%;
-    z-index: 999;
-    height: 100px;
-    align-items: center;
-    padding: 0 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  background: hsla(197,64%,23%,.95);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 100;
 }
-
+.navbar .logo { display: flex; align-items: center; }
+.navbar .drop { font-size: 1.5em; margin-left: 8px; cursor: pointer; user-select: none; }
+.navbar ul { display: flex; list-style: none; gap: 20px; align-items: center; }
 .navbar a {
-    text-decoration: none;
-    font-family: Impact, sans-serif;
-    font-size: 1.5em;
-    letter-spacing: 0.02em;
-    color: white;
-    margin: 0 10px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1em;
+  position: relative;
 }
-
-.navbar a:hover {
-    background-color: hsla(0, 56%, 40%, 0.95);
-    color: white;
-}
-
-.navbar a:active {
-    color: rgb(255, 255, 255);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.logo img {
-    width: 50px;
-    height: 50px;
-    padding: 10px;
-}
-
-.drop {
-    font-size: 2em;
-    margin-left: -5px;
-    cursor: pointer;
-    color: white;
-    user-select: none;
-}
+.navbar a:hover { background: hsla(0,56%,40%,.95); padding: 4px 8px; border-radius: 4px; }
+.welcome-user { font-size: 1em; margin-left: 16px; }
 
 /* Dropdown Menu Styles */
 .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: hsla(197, 64%, 23%, 0.95);
-    border-radius: 5px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-    z-index: 1000;
-    min-width: 200px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-20px);
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  background: hsla(197,64%,23%,.95);
+  border-radius: 5px;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: visibility .2s, opacity .2s, transform .2s;
 }
-
 .dropdown-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-menu ul {
-    list-style: none;
-    padding: 10px 0;
-    margin: 0;
-}
-
-.dropdown-menu li {
-    padding: 0;
-    margin: 0;
-}
-
-.dropdown-menu a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    font-size: 1.2em;
-    text-align: left;
-    margin: 0;
-}
-
-.dropdown-menu a:hover {
-    background-color: hsla(0, 56%, 40%, 0.95);
-    color: white;
-}
-
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-#navbar-main { /* Specific ID for the main navigation to avoid conflict */
-    display: flex;
-    list-style: none;
-}
-
-#navbar-main li {
-    margin: 0 10px;
-}
-
-.empty {
-    flex-grow: 1;
-}
-
-#discord img {
-    height: 75px;
-    width: 75px;
-}
-
-/* --- Rise Dishonored Specific Styles (risendishonored.html) --- */
-/* Main Content (Hero Section) */
-.top {
-    margin-top: 0px; /* Pushes it down past the fixed navbar */
-    padding-top: 0;
-    padding-bottom: 40px; /* Space below the main-bar */
-    background: none; /* Remove any specific background from .top */
-    display: flex;
-    justify-content: center;
-}
-
-.main {
-    background: url('../images/bg2.png') no-repeat center center; /* Background image for the .main div */
-    background-size: cover; /* Cover the entire section */
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px; /* Give .main a minimum height to properly show the background */
-    padding-top: 100px; /* Adjust padding for fixed navbar */
-}
-
-.main-bar {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    padding: 10px;
-    border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.164);
-    border: 10px solid rgba(0, 0, 0, 0.637);
-    max-width: 100%;
-}
-
-.main-bar::-webkit-scrollbar {
-    display: none;
-}
-
-.main-bar > div {
-    min-width: 300px;
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px;
-    flex-shrink: 0;
-}
-
-.main-bar:active {
-    cursor: grabbing;
-}
-
-.main-bar:hover {
-    cursor: grab;
-}
-
-/* Trailer Section */
-.trailer-section {
-    position: relative;
-    width: 1345px; /* Consider making this responsive, e.g., max-width: 100% */
-    height: 800px; /* Consider making this responsive, e.g., height: 70vh */
-    overflow: hidden;
-    background: black;
-    margin-top: 100px; /* Push down to clear fixed navbar */
-}
-
-.centered-image {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 400px;
-    pointer-events: none;
-    z-index: 15;
-}
-
-.video-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.video-wrapper video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: auto;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-    z-index: 0;
-}
-
-.video-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-    z-index: 1;
-    padding: 20px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-}
-
-.video-overlay h1 {
-    font-size: 3em;
-    margin-bottom: 10px;
-}
-
-.video-overlay p {
-    font-size: 1.2em;
-}
-
-/* Badge Style */
-.availability-box {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background-color: rgba(0, 0, 0, 0.75);
-    padding: 16px 24px;
-    border-radius: 8px;
-    color: white;
-    text-align: center;
-    z-index: 10;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    animation: fadeInUp 0.8s ease;
-}
-
-.availability-box-header {
-    font-size: 1rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-    color: #ffffffaa;
-    margin-bottom: 6px;
-    font-family: 'Space Mono', monospace;
-}
-
-.availability-links a {
-    display: inline-block;
-    text-decoration: none;
-}
-
-.availability-links img {
-    height: 32px;
-    width: auto;
-    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Third Section (Coming Soon & Reviews) */
-.third {
-    margin-top: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    flex-wrap: wrap;
-    background-image: url('../images/bg1.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: transparent;
-}
-
-.content-wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1200px;
-    gap: 40px;
-    align-items: center;
-    background-color: transparent;
-    padding: 60px 20px;
-    border-radius: 10px;
-    text-align: center;
-    color: white;
-}
-
-.content-wrapper h1 {
-    font-size: 3em;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.content-wrapper p {
-    font-size: 1.2em;
-    max-width: 600px;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-}
-
-.soon {
-    display: none;
-}
-
-.reviews {
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(160, 158, 158, 0.27);
-    padding: 20px;
-    margin: 0 20px;
-    border-radius: 10px;
-    max-height: 500px;
-    overflow-y: auto;
-    width: 100%;
-}
-
-.reviews h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #fff;
-}
-
-.cards {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.review-card {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 4px;
-    border: 1px solid #000;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.review-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    border-color: rgb(100, 144, 226);
-}
-
-.reviewer {
-    margin-top: 10px;
-    font-style: italic;
-    color: #ddcb29f1;
-}
-
-/* Smooth navbar hide/show */
-.hidden-navbar {
-    opacity: 0;
-    transform: translateY(-100%);
-    pointer-events: none;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.navbar {
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-/* Cursor feedback for drag scrolling */
-.main-bar {
-    cursor: grab;
-}
-
-.main-bar.active {
-    cursor: grabbing;
-}
-
-/* --- Knights TV (index.html) Specific Styles --- */
-#player-container {
-    flex-grow: 1;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: black;
-    padding-top: 100px; /* Add padding to account for fixed navbar */
-}
-
-#twitch-embed {
-    width: 80vw;
-    height: 80vh;
-    max-width: 1280px;
-    max-height: 720px;
-}
-
-.nav-buttons {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    pointer-events: none;
-    transform: translateY(-50%);
-}
-
-.nav-buttons button { /* Specificity for buttons within nav-buttons */
-    pointer-events: auto;
-    background-color: rgba(0, 170, 255, 0.7);
-    border: none;
-    color: white;
-    font-size: 2rem;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    user-select: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.nav-buttons button:hover {
-    background-color: rgba(0, 170, 255, 1);
-}
-
-/* --- Form (form.html) Specific Styles --- */
-.form-container {
-    flex-grow: 1; /* Allows form content to take available space */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    padding-top: 120px; /* Adjust padding for fixed navbar */
-    color: white; /* Ensure text is visible */
-    width: 100%; /* Take full width */
-}
-
-.form-container h1 {
-    font-size: 2.5em;
-    margin-bottom: 30px;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    text-align: center;
-}
-
-form {
-    background: hsla(197, 64%, 23%, 0.75); /* Dark blue, semi-transparent to match navbar */
-    padding: 2.5rem;
-    border-radius: 8px;
-    max-width: 500px; /* Slightly wider form for better input spacing */
-    width: 100%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Subtle shadow */
-}
-
-input {
-    display: block;
-    margin: 1.2rem 0; /* More vertical space between inputs */
-    padding: 0.8rem; /* Larger padding for easier input */
-    width: 100%;
-    font-size: 1.1rem;
-    border-radius: 4px;
-    border: 1px solid hsla(197, 64%, 40%, 0.95); /* Lighter blue border */
-    background: #2b2b2b; /* Slightly lighter dark background for input */
-    color: white;
-}
-
-input::placeholder {
-    color: #ccc; /* Lighter placeholder text */
-}
-
-input:focus {
-    outline: none;
-    border-color: #00aaff; /* Highlight on focus */
-    box-shadow: 0 0 8px rgba(0, 170, 255, 0.5);
-}
-
-/* Note: Button style for form is now combined but might need specific overrides if it differs from other buttons */
-/* The main button style from the original "Knights TV" CSS now applies to all buttons,
-   so we'll modify the form's button to ensure it uses the desired reddish-orange. */
-.form-container button[type="submit"] {
-    background-color: hsla(0, 56%, 40%, 0.95); /* Reddish-orange button to stand out */
-    border: none;
-    padding: 1rem; /* Larger button */
-    width: 100%;
-    font-size: 1.2rem;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 1.5rem; /* More space above button */
-    transition: background-color 0.3s ease;
-}
-
-.form-container button[type="submit"]:hover {
-    background-color: hsla(0, 56%, 50%, 0.95); /* Lighter red on hover */
-}
-
-.confirmation {
-    margin-top: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* --- About Page Specific Styles (about.html) --- */
-.content-section.about-page {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Align content to the top */
-    padding: 2rem;
-    padding-top: 120px; /* Adjust padding for fixed navbar */
-    color: white;
-    width: 100%;
-    max-width: 900px; /* Max width for content */
-    margin: 0 auto; /* Center the content */
-    line-height: 1.6;
-    text-align: left;
-}
-
-.content-section.about-page h1 {
-    font-size: 3em;
-    margin-bottom: 30px;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    text-align: center;
-    width: 100%;
-}
-
-.content-section.about-page h2 {
-    font-size: 2em;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    color: #00aaff; /* Blue like your buttons */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    width: 100%;
-    text-align: left;
-}
-
-.content-section.about-page p {
-    font-size: 1.1em;
-    margin-bottom: 15px;
-    color: #ddd;
-    text-align: left;
-}
-
-.content-section.about-page .game-details ul,
-.content-section.about-page .external-links ul {
-    list-style: none; /* Remove default bullets */
-    padding-left: 0;
-    width: 100%;
-}
-
-.content-section.about-page .game-details li,
-.content-section.about-page .external-links li {
-    background-color: hsla(197, 64%, 23%, 0.7); /* Dark blue, slightly transparent */
-    margin-bottom: 10px;
-    padding: 12px 20px;
-    border-radius: 5px;
-    border: 1px solid hsla(197, 64%, 40%, 0.95);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.content-section.about-page .game-details li strong {
-    color: #bbe5ff; /* Lighter blue for key terms */
-    min-width: 120px; /* Ensure alignment for details */
-    margin-right: 10px;
-}
-
-.content-section.about-page .game-details ul ul { /* For nested language list */
-    padding-left: 20px;
-    margin-top: 5px;
-    background: none;
-    border: none;
-    display: block;
-}
-.content-section.about-page .game-details ul ul li {
-    background: none;
-    border: none;
-    padding: 5px 0;
-    margin-bottom: 0;
-}
-
-.content-section.about-page .external-links a {
-    color: #00aaff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.content-section.about-page .external-links a:hover {
-    color: #0088cc;
-    text-decoration: underline;
-}
-
-.content-section.about-page .notes {
-    background-color: hsla(0, 56%, 40%, 0.2); /* Slightly red for 'notes' */
-    border: 1px solid hsla(0, 56%, 40%, 0.5);
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 40px;
-    width: 100%;
-    text-align: center;
-}
-
-.content-section.about-page .notes p {
-    color: #ffcccc; /* Lighter red for notes text */
-    font-style: italic;
-    font-size: 1em;
-    margin-bottom: 10px;
-}
-
-/* Footer (consistent across all pages) */
-.footer {
-    margin-top: auto; /* Pushes footer to the bottom */
-    text-align: center;
-    color: #fff;
-    padding: 20px;
-    background-color: hsla(197, 64%, 23%, 0.95); /* Matches other pages */
-    width: 100%;
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+.dropdown-menu ul { list-style: none; }
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 16px;
+  font-size: 1em;
+}
+.dropdown-menu li a:hover { background: hsla(0,56%,40%,.95); }
+
+/* Container & Sections */
+.container { width: 100%; max-width: 800px; margin: 120px auto; padding: 0 20px; flex: 1; }
+.page-section { margin-top: 20px; }
+#login-section input, #login-section button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  font-size: 1em;
+  border-radius: 4px;
+}
+#login-section input {
+  background: #2b2b2b;
+  border: 1px solid hsla(197,64%,40%,.95);
+  color: #fff;
+}
+#login-section input:focus {
+  outline: none;
+  border-color: #00aaff;
+}
+#loginBtn {
+  background: #00aaff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+#loginBtn:hover { background: #008ecc; }
+#regenerateBtn {
+  background: #ffaa00;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+#regenerateBtn:hover { background: #cc8800; }
+
+#status {
+  margin: 10px 0;
+  font-weight: bold;
 }
