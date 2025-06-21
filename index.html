@@ -4,26 +4,30 @@
   <meta charset="UTF-8" />
   <title>Risetopia</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet" />
 </head>
 <body>
   <!-- Navbar (hidden until login) -->
   <section class="navbar" id="navbar" style="display: none;">
-    <div class="logo">
-      <img src="images/winton.gif" alt="Logo">
-      <div id="menuDrop" class="drop">↓</div>
+    <div class="container">
+      <div class="logo">
+        <img src="images/winton.gif" alt="Logo" />
+        <div class="drop" id="menuDrop">↓</div>
+      </div>
+      <nav>
+        <ul id="navbar-main">
+          <li><a href="#" id="navRiseDishonored">Rise Dishonored</a></li>
+          <li>
+            <a href="#" id="navAuthTrigger">Login</a>
+            <ul id="authMenuDropdown" class="dropdown-menu" style="display:none;">
+              <li><a href="#" id="navLogout">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="empty"></div>
+      <div id="welcomeUserDisplay" class="welcome-user"></div>
     </div>
-    <nav>
-      <ul id="navbar-main">
-        <li><a href="#" id="navRiseDishonored">Rise Dishonored</a></li>
-        <li><a href="#" id="navAuthTrigger">Login</a>
-          <ul id="authMenuDropdown" class="dropdown-menu">
-            <li><a href="#" id="navLogout">Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-    <div class="empty"></div>
-    <div id="welcomeUserDisplay" class="welcome-user"></div>
   </section>
 
   <div class="container">
@@ -44,7 +48,7 @@
   </div>
 
   <!-- Mobile Dropdown Menu -->
-  <div id="dropdownMenu" class="dropdown-menu">
+  <div id="dropdownMenu" class="dropdown-menu" style="display:none;">
     <ul>
       <li><a href="#" id="mobileNavUser">Login / User Info</a></li>
       <li><a href="#" id="mobileNavRiseDishonored">Rise Dishonored</a></li>
