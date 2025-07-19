@@ -1,428 +1,74 @@
-/* Reset */
-* {
+/* General styles */
+body {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    background-color: #1a1a1a; /* Consistent dark background */
+    background-color: #0d0d0d;
     font-family: 'Space Mono', monospace;
-}
-
-
-/* Navbar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    background-color: hsla(197, 64%, 23%, 0.95);
-    position: fixed;
-    width: 100%;
-    z-index: 999;
-    height: 100px;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.navbar a {
-    text-decoration: none;
-    font-family: Impact, sans-serif;
-    font-size: 1.5em;
-    letter-spacing: 0.02em;
     color: white;
-    margin: 0 10px;
 }
 
-.navbar a:hover {
-    background-color: hsla(0, 56%, 40%, 0.95); /* Highlight on hover */
-    color: white; /* Maintain white text on hover */
-}
-
-.navbar a:active {
-    color: rgb(255, 255, 255);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    position: relative; /* Crucial for positioning the dropdown */
-}
-
-.logo img {
-    width: 50px;
-    height: 50px;
-    padding: 10px;
-}
-
-.drop {
-    font-size: 2em;
-    margin-left: -5px;
-    cursor: pointer; /* Indicate it's clickable */
-    color: white; /* Ensure visibility */
-    user-select: none; /* Prevent text selection on click */
-}
-
-/* Dropdown Menu Styles */
-.dropdown-menu {
-    position: absolute; /* Position relative to .logo */
-    top: 100%; /* Position below the .logo/navbar */
-    left: 0; /* Align with the left edge of the .logo */
-    background-color: hsla(197, 64%, 23%, 0.95); /* Slightly darker background */
-    border-radius: 5px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-    z-index: 1000; /* Ensure it's above other content */
-    min-width: 200px; /* Adjust width as needed */
-    opacity: 0; /* Start hidden */
-    visibility: hidden; /* Start hidden */
-    transform: translateY(-20px); /* Initial slight upward offset for animation */
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease; /* Smooth transition */
-}
-
-.dropdown-menu.show {
-    opacity: 1; /* Show when 'show' class is added */
-    visibility: visible; /* Show when 'show' class is added */
-    transform: translateY(0); /* Move to final position for animation */
-}
-
-.dropdown-menu ul {
-    list-style: none;
-    padding: 10px 0;
-    margin: 0;
-}
-
-.dropdown-menu li {
-    padding: 0;
-    margin: 0;
-}
-
-.dropdown-menu a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block; /* Make the whole area clickable */
-    font-size: 1.2em; /* Adjust font size for menu items */
-    text-align: left; /* Align text to the left */
-    margin: 0; /* Remove existing margin from general navbar a */
-}
-
-.dropdown-menu a:hover {
-    background-color: hsla(0, 56%, 40%, 0.95); /* Highlight on hover */
-    color: white; /* Maintain white text on hover */
-}
-
-.container { /* This is for the navbar's inner container */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.container ul { /* This is for the navbar's primary links */
-    display: flex;
-    list-style: none;
-}
-
-.container li { /* This is for the navbar's primary links */
-    margin: 0 10px;
-}
-
-.empty {
-    flex-grow: 1;
-}
-
-#discord img {
-    height: 75px; /* Adjust as needed */
-    width: 75px; /* Adjust as needed */
-}
-
-/* Main Content (Hero Section) */
-.top {
-    margin-top: 0px; /* Pushes it down past the fixed navbar */
-    padding-top: 0;
-    padding-bottom: 40px; /* Space below the main-bar */
-    background: none; /* Remove any specific background from .top */
-    display: flex;
-    justify-content: center;
-}
-
-.main {
-    background: url('../images/bg2.png') no-repeat center center; /* Background image for the .main div */
-    background-size: cover; /* Cover the entire section */
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px; /* Give .main a minimum height to properly show the background */
-}
-
-.main-bar {
-    display: flex;
-    flex-direction: row;
+/* Comic layout */
+.comic-page {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
     gap: 10px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    padding: 10px;
-    border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.164);
-    border: 10px solid rgba(0, 0, 0, 0.637);
-    max-width: 100%;
+    padding: 20px;
+    max-width: 1200px;
 }
 
-.main-bar::-webkit-scrollbar {
-    display: none;
-}
-
-.main-bar > div {
-    min-width: 300px;
-    height: 200px;
+.panel {
+    position: relative;
     background-size: cover;
     background-position: center;
-    border-radius: 10px;
-    flex-shrink: 0;
+    border: 2px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.main-bar:active {
-    cursor: grabbing;
+/* Individual panels with example images */
+.panel1 {
+    grid-column: span 3;
+    height: 200px;
+    background-image: url('../images/comic1.jpg');
 }
 
-.main-bar:hover {
-    cursor: grab;
+.panel2 {
+    grid-row: span 2;
+    height: 420px;
+    background-image: url('../images/comic2.jpg');
 }
 
-/* Trailer Section */
-.trailer-section {
-  position: relative;
-  width: 1345px;
-  height: 800px;
-  overflow: hidden;
-  background: black;
+.panel3 {
+    height: 200px;
+    background-image: url('../images/comic3.jpg');
 }
 
-.centered-image {
-  position: absolute;
-  top: 10%;       /* Adjust how far from the top it sits; tweak this value */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 400px;   /* Or set max-width for responsiveness */
-  pointer-events: none; /* Optional: so it doesn’t block clicks on video */
-  z-index: 15;    /* Above the video and availability box */
+.panel4 {
+    height: 200px;
+    background-image: url('../images/comic4.jpg');
 }
 
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.panel5 {
+    grid-column: span 3;
+    height: 300px;
+    background-image: url('../images/comic5.jpg');
 }
 
-.video-wrapper video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: auto;
-  height: 100%;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  z-index: 0;
-}
-
-.video-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-  z-index: 1;
-  padding: 20px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-}
-
-.video-overlay h1 {
-  font-size: 3em;
-  margin-bottom: 10px;
-}
-
-.video-overlay p {
-  font-size: 1.2em;
-}
-
-/* Badge Style */
-.availability-box {
-  position: absolute;
-  bottom: 20px;  /* moved to bottom */
-  left: 20px;    /* moved to left */
-  background-color: rgba(0, 0, 0, 0.75);
-  padding: 16px 24px;
-  border-radius: 8px;
-  color: white;
-  text-align: center;
-  z-index: 10;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  animation: fadeInUp 0.8s ease;
-}
-
-
-.availability-box-header {
-  font-size: 1rem;
-  font-weight: bold;
-  letter-spacing: 2px;
-  color: #ffffffaa;
-  margin-bottom: 6px;
-  font-family: 'Space Mono', monospace;
-}
-
-.availability-links a {
-  display: inline-block;
-  text-decoration: none;
-}
-
-.availability-links img {
-  height: 32px;
-  width: auto;
-  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-/* Third Section (Coming Soon & Reviews) */
-.third {
-    margin-top: 0; /* Make it immediately follow the trailer-section */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0; /* Remove padding from section itself */
-    flex-wrap: wrap;
-
-    /* Background Image for the entire third section */
-    background-image: url('../images/bg1.png'); /* Your image path */
-    background-size: cover; /* Image will cover the entire .third section */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent repeating */
-    background-color: transparent; /* Ensure no solid color is visible behind the image */
-}
-
-.content-wrapper {
-    display: flex;
-    flex-direction: column; /* Stacks H1/P then reviews */
-    width: 100%;
-    max-width: 1200px; /* Constrain content width */
-    gap: 40px; /* Space between "Coming Soon" text area and Reviews */
-    align-items: center; /* Center content within this wrapper */
-
-    /* Make background transparent to let .third's background image show through */
-    background-color: transparent;
-    
-    padding: 60px 20px; /* Adjust top/bottom padding to make the image visible around text */
-    border-radius: 10px;
-    text-align: center;
-    color: white;
-}
-
-/* Style the H1 and P directly under .content-wrapper */
-.content-wrapper h1 {
-    font-size: 3em;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.content-wrapper p {
-    font-size: 1.2em;
-    max-width: 600px;
-    margin-bottom: 20px; /* Margin below paragraph to separate from reviews if needed */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-}
-
-/* Ensure the old .soon class is hidden/removed */
-.soon {
-    display: none; /* Hide if you're not using this div anymore */
-}
-
-.reviews {
-    display: flex;
-    flex-direction: column;
-    /* Keep existing semi-transparent background or make it solid if desired */
-    background-color: rgba(160, 158, 158, 0.27);
-    padding: 20px;
-    margin: 0 20px; /* Keep horizontal margins for inner spacing */
-    border-radius: 10px;
-    max-height: 500px;
-    overflow-y: auto;
-    width: 100%; /* Take full width of parent (content-wrapper) */
-}
-
-.reviews h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #fff;
-}
-
-.cards {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.review-card {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 4px;
-    border: 1px solid #000;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.review-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    border-color: rgb(100, 144, 226);
-}
-
-.reviewer {
-    margin-top: 10px;
-    font-style: italic;
-    color: #ddcb29f1;
-}
-
-/* Footer */
+/* Footer styling */
 footer {
-    margin-top: 0; /* Ensure footer immediately follows the last section */
     text-align: center;
-    color: #fff;
-    padding: 20px;
-    background-color: hsla(197, 64%, 23%, 0.95);
+    margin: 30px 0;
 }
 
-/* Smooth navbar hide/show */
-.hidden-navbar {
-    opacity: 0;
-    transform: translateY(-100%);
-    pointer-events: none;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
+/* Responsive layout for smaller screens */
+@media screen and (max-width: 768px) {
+    .comic-page {
+        grid-template-columns: 1fr;
+    }
 
-.navbar {
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-/* Cursor feedback for drag scrolling */
-.main-bar {
-    cursor: grab;
-}
-
-.main-bar.active {
-    cursor: grabbing;
+    .panel1, .panel2, .panel3, .panel4, .panel5 {
+        grid-column: span 1 !important;
+        height: 250px;
+    }
 }
