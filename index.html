@@ -12,14 +12,59 @@
             font-family: 'Space Mono', monospace;
             color: white;
         }
+        .navbar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            width: 200px;
+            background-color: rgba(20, 20, 20, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1000;
+            padding: 20px 10px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .logo img {
+            width: 100px;
+        }
+        .dropdown-menu ul,
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+        }
+        .dropdown-menu a,
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .dropdown-menu a:hover,
+        nav a:hover {
+            color: #ff0055;
+        }
+        #discord img {
+            width: 40px;
+        }
         .comic-page {
+            margin-left: 220px;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             grid-template-rows: auto auto auto;
             gap: 10px;
             padding: 20px;
             max-width: 1200px;
-            margin: auto;
         }
         .panel {
             position: relative;
@@ -56,6 +101,27 @@
             text-align: center;
             margin: 30px 0;
         }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .navbar {
+                position: static;
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 10px;
+            }
+            .comic-page {
+                margin-left: 0;
+                grid-template-columns: 1fr;
+            }
+            .panel1, .panel2, .panel3, .panel4, .panel5 {
+                grid-column: span 1 !important;
+                height: 250px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -63,7 +129,6 @@
         <div class="container">
             <div class="logo">
                 <img src="images/winton.gif" alt="Logo">
-                <div class="drop" id="menuDrop">↓</div>
             </div>
             <div class="dropdown-menu" id="dropdownMenu">
                 <ul>
@@ -75,15 +140,14 @@
             </div>
             <nav>
                 <ul id="navbar">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="risedishonored.com">Home</a></li>
                     <li><a href="#">Redeem Steam</a></li>
                     <li><a href="https://discord.com/channels/1350551099576287333/1381029554558341193">Support</a></li>
                 </ul>
             </nav>
-            <div class="empty"></div>
             <div id="discord">
                 <a href="https://discord.gg/DAXbU23nda">
-                    <img src="images/discord.png" alt="Discord" style="width: 50px; height: auto;">
+                    <img src="images/discord.png" alt="Discord">
                 </a>
             </div>
         </div>
