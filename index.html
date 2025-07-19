@@ -2,9 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Rise Dishonored</title>
+    <title>Promotional Comic Rise Dishonored</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-color: #0d0d0d;
+            font-family: 'Space Mono', monospace;
+            color: white;
+        }
+        .comic-page {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 10px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .panel {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .panel1 {
+            grid-column: span 3;
+            height: 200px;
+            background-image: url('images/comic1.jpg');
+        }
+        .panel2 {
+            grid-row: span 2;
+            height: 420px;
+            background-image: url('images/comic2.jpg');
+        }
+        .panel3 {
+            height: 200px;
+            background-image: url('images/comic3.jpg');
+        }
+        .panel4 {
+            height: 200px;
+            background-image: url('images/comic4.jpg');
+        }
+        .panel5 {
+            grid-column: span 3;
+            height: 300px;
+            background-image: url('images/comic5.jpg');
+        }
+        footer {
+            text-align: center;
+            margin: 30px 0;
+        }
+    </style>
 </head>
 <body>
     <section class="navbar">
@@ -13,7 +65,6 @@
                 <img src="images/winton.gif" alt="Logo">
                 <div class="drop" id="menuDrop">↓</div>
             </div>
-
             <div class="dropdown-menu" id="dropdownMenu">
                 <ul>
                     <li><a href="#login">Login</a></li>
@@ -22,7 +73,6 @@
                     <li><a href="#notes">Release Notes</a></li>
                 </ul>
             </div>
-
             <nav>
                 <ul id="navbar">
                     <li><a href="index.html">Home</a></li>
@@ -30,7 +80,6 @@
                     <li><a href="https://discord.com/channels/1350551099576287333/1381029554558341193">Support</a></li>
                 </ul>
             </nav>
-
             <div class="empty"></div>
             <div id="discord">
                 <a href="https://discord.gg/DAXbU23nda">
@@ -39,22 +88,22 @@
             </div>
         </div>
     </section>
-</header>
 
+    <section class="comic-page">
+        <div class="panel panel1"></div>
+        <div class="panel panel2"></div>
+        <div class="panel panel3"></div>
+        <div class="panel panel4"></div>
+        <div class="panel panel5"></div>
+    </section>
 
-<section class="third">
-    <div class="content-wrapper">
-        <h1>Coming Soon</h1>
-        <p>Rise Dishonored will be uploaded very Soon... please be patient</p>
+    <footer>
+        <p>© Admin Page</p>
+    </footer>
 
-
-<footer>
-    <p>© Admin Page</p>
-</footer>
-
-<!-- Scripts -->
-<script src="scripts/inv.js"></script>
-<script src="scripts/scroll.js"></script>
-<script src="scripts/menu.js"></script>
+    <!-- Scripts -->
+    <script src="scripts/inv.js"></script>
+    <script src="scripts/scroll.js"></script>
+    <script src="scripts/menu.js"></script>
 </body>
 </html>
